@@ -6,6 +6,8 @@ class Model
     protected $properties=[];
     protected $table;
 
+    protected $id;
+
     public function __construct( $properties=[]){
         $this->properties=$properties;
     }
@@ -32,7 +34,7 @@ class Model
     }
 
     public function delete(){
-        App::get('database')->delete($this->getTable(),$this->properties['id']);
+        App::get('database')->delete($this->getTable(),$this->properties[$this->getid()]);
 
         return $this;
     }
@@ -63,6 +65,10 @@ class Model
 
     public function getTable(){
         return $this->table;
+
+    }
+    public function getid(){
+        return $this->id;
 
     }
     public function setProperties($properties){

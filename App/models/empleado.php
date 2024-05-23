@@ -5,5 +5,6 @@ class empleado extends Model
 {
 
     protected $table =('empleado');
+    protected $id =('id_e');
 
 }

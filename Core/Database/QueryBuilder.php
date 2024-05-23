@@ -8,13 +8,13 @@ class QueryBuilder {
         $this->pdo = $pdo;
     }
     public function selectAll($table) {
-        $query=$this->pdo->prepare("SELECT * FROM {$table}");
+        $query=$this->pdo->prepare("SELECT * FROM {$table} where estado=1");
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function find($table,$id) {
-        $query=$this->pdo->prepare("SELECT * FROM {$table} WHERE id={$id} limit 0,1");
+        $query=$this->pdo->prepare("SELECT * FROM {$table} WHERE id_e={$id} limit 0,1");
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC)[0];
     }
@@ -54,7 +54,7 @@ class QueryBuilder {
             return "{$col}=:{$col}";
         },$cols));
         //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
-        $sql="UPDATE  {$table} SET {$cols} WHERE id=:id";
+        $sql="UPDATE  {$table} SET {$cols} WHERE id_e=:id";
         // encerramos en un try/cactch por si llega a suceder un error 
         try {
             $query=$this->pdo->prepare($sql);
@@ -70,7 +70,9 @@ class QueryBuilder {
     public function delete ($table,$id){
         // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
         //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
-        $sql="DELETE From {$table}  WHERE id=:id";
+        // $sql="DELETE From {$table}  WHERE id=:id";
+        $sql="UPDATE  {$table} SET estado= 0 WHERE :id=:id";
+        
         // encerramos en un try/cactch por si llega a suceder un error 
         try {
             $query=$this->pdo->prepare($sql);

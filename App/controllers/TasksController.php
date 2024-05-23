@@ -1,11 +1,12 @@
 <?php
 namespace App\controllers;
+use App\models\empleado;
 use App\models\Task;
 class TasksController
 {
     public function create()
     {
-        Task::create([
+        empleado::create([
             'title' => $_POST['title'],
             'completed' => 0,
             'color' => $_POST['color'],
@@ -15,7 +16,7 @@ class TasksController
     }
     public function toggle()
     {
-        $task = Task::find($_POST['id']);
+        $task = empleado::find($_POST['id']);
         $task->update([
             'completed' => $_POST['completed'],
         ]);
@@ -23,9 +24,9 @@ class TasksController
     }
     public function delete()
     {
-        $task = Task::find($_POST['id']);
+        $task = empleado::find($_POST['id']);
         $task->delete();
-        return redirect('index.php?url=home');
+        return redirect('index.php?url=tables');
 
     }
 }
