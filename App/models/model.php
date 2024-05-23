@@ -26,12 +26,12 @@ class Model
         return $model;
     }
 
-    public function update($properties){
-        App::get('database')->update($this->getTable(),$this->properties['id'],$properties);
+    // public function update($properties){
+    //     App::get('database')->update($this->getTable(),$this->properties[$this->getid()],$properties);
 
-        $this->setProperties($properties);
-        return $this;
-    }
+    //     $this->setProperties($properties);
+    //     return $this;
+    // }
 
     public function delete(){
         App::get('database')->delete($this->getTable(),$this->properties[$this->getid()]);

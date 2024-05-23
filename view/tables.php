@@ -72,7 +72,7 @@
                                     </form>
                                 </td>
                                 <td><button data-action="editar"
-                                        onclick="aparezcaModal(<?= $user->id_e?>,' <td><?= $user->cedula ?>', '<?= $user->name ?>', '<?= $user->email ?>','<?= $user->oficina ?>','<?= $user->posición ?>','<?= $user->direcion ?>')"
+                                        onclick="aparezcaModal(<?= $user->id_e?>,'<?= $user->cedula ?>', '<?= $user->name ?>', '<?= $user->email ?>','<?= $user->oficina ?>','<?= $user->posición ?>','<?= $user->direcion ?>')"
                                         class="btn btn-success" type="submit"><svg
                                             class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -95,7 +95,8 @@
 
 </div>
 <!-- End of Main Content -->
-<div id="mimodal" class="modal" aria-hidden="true" tabindex="-1">
+<?= require "modal/modal.php" ?>
+<!-- <div id="mimodal" class="modal" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog modal-lg text-center">
             <div class="modal-content text-center">
                 <div class="modal-header bg-info text-center">
@@ -105,11 +106,9 @@
                     <form id="formix" method="post" action="index.php?url=actualizar">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>id :</label>
-                                </div>
+                                
                                 <div class="col-md-9">
-                                    <input type="text" id="modal_id" name="id" maxlength="10" placeholder=""
+                                    <input type="hidden" id="modal_id" name="id" maxlength="10" placeholder=""
                                         class="form-control border-success text-uppercase"
                                         onchange="obtenernombredelinput();">
                                 </div>
@@ -214,7 +213,7 @@
             }
         });
     });
-</script>
+</script> -->
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">

@@ -1,7 +1,11 @@
-function aparezcaModal(id, nombre, email) {
-    // document.getElementById('modal_id').value = id;
-    // document.getElementById('Enom').value = nombre;
-    // document.getElementById('Email').value = email;
+function aparezcaModal(id,cedula, nombre, email,oficina,position,dire) {
+    document.getElementById('modal_id').value = id;
+    document.getElementById('Ecedu').value = cedula;
+    document.getElementById('Enom').value = nombre;
+    document.getElementById('Email').value = email;
+    document.getElementById('Eofi').value = oficina;
+    document.getElementById('Epo').value = position;
+    document.getElementById('Edire').value = dire;
     $('#mimodal').modal('show'); // Esto muestra el modal
     
 }

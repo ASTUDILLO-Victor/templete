@@ -47,31 +47,28 @@ class QueryBuilder {
         }
         
     }
-    public function update ($table,$id,$params){
-        // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
-        $cols=array_keys($params);
-        $cols=implode(', ',array_map(function($col){
-            return "{$col}=:{$col}";
-        },$cols));
-        //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
-        $sql="UPDATE  {$table} SET {$cols} WHERE id_e=:id";
-        // encerramos en un try/cactch por si llega a suceder un error 
-        try {
-            $query=$this->pdo->prepare($sql);
-            //placeholder :name
-            //en el arrar tengo ['name'=> 'victor']
-            //se guardara en el placeholder victor
-            $query->execute([...$params,'id'=>$id]);
-        } catch (\PDOException $ERROR) {
-            die($ERROR->getMessage());
-        }
+    // public function update ($table,$id,$params){
         
-    }
+    //     $cols=array_keys($params);
+    //     $cols=implode(', ',array_map(function($col){
+    //         return "{$col}=:{$col}";
+    //     },$cols));
+    //     $sql="UPDATE  {$table} SET {$cols} WHERE id_e=:id";
+    //     try {
+    //         $query=$this->pdo->prepare($sql);
+    //         $params['id'] = $id;
+    //         $query->execute($params);
+            
+    //     } catch (\PDOException $ERROR) {
+    //         die($ERROR->getMessage());
+    //     }
+        
+    // }
     public function delete ($table,$id){
         // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
         //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
         // $sql="DELETE From {$table}  WHERE id=:id";
-        $sql="UPDATE  {$table} SET estado= 0 WHERE :id=:id";
+        $sql="UPDATE  {$table} SET estado= 0 WHERE id_e=:id";
         
         // encerramos en un try/cactch por si llega a suceder un error 
         try {

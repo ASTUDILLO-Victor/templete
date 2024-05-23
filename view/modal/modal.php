@@ -1,18 +1,15 @@
-<div id="mimodal" class="modal" aria-hidden="true" tabindex="-1">
+<div id="mimodal" class="modal borde" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog modal-lg text-center">
             <div class="modal-content text-center">
-                <div class="modal-header bg-info text-center">
+                <div class="modal-header bg-primary text-center text-white">
                     <h2><b>EDITAR REGISTROS</b></h2>
                 </div>
                 <div class="modal-body">
                     <form id="formix" method="post" action="index.php?url=actualizar">
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3 text-right">
-                                    <label>id :</label>
-                                </div>
+                            <div class="row"> 
                                 <div class="col-md-9">
-                                    <input type="text" id="modal_id" name="id" maxlength="10" placeholder=""
+                                    <input type="hidden" id="modal_id" name="id" maxlength="10" placeholder=""
                                         class="form-control border-success text-uppercase"
                                         onchange="obtenernombredelinput();">
                                 </div>
@@ -118,3 +115,9 @@
         });
     });
 </script>
+
+<style>
+    .borde{
+        border-radius: 30px;
+    }
+</style>
