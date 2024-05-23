@@ -1,0 +1,23 @@
+{
+    "name": "user/templete",
+    "type": "project",
+    "authors": [
+        {
+            "name": "ASTUDILLO-Victor",
+            "email": "167276606+ASTUDILLO-Victor@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\":"App/",
+            "Core\\":"Core/"
+        },
+        "files": [
+            "functions.php"
+        ]
+    }
+    
+}
