@@ -14,7 +14,15 @@ function cerrarModal(){
     $("#mimodal").modal("hide");
 }
 
+function aparezcaModal2() {
+    
+    $('#mimodal2').modal('show'); // Esto muestra el modal
+    
+}
 
+function cerrarModal2(){
+    $("#mimodal2").modal("hide");
+}
 // function aparezcaModal(id, nom, cedu, fnaci){
 //     $("#mimodal").modal("show");
 //     $("#Enombre").val(nom);

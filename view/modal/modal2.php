@@ -1,17 +1,17 @@
-<div id="mimodal" class="modal borde" aria-hidden="true" tabindex="-1">
+<div id="mimodal2" class="modal borde" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog modal-lg text-center">
             <div class="modal-content text-center">
                 <div class="modal-header bg-primary text-center text-white">
                     <h2><b>EDITAR REGISTROS</b></h2>
                 </div>
                 <div class="modal-body">
-                    <form id="formix" method="post" action="index.php?url=actualizar">
+                    <form id="formix" method="post" action="index.php?url=crear">
                         <div class="form-group">
                             <div class="row"> 
                                 <div class="col-md-9">
                                     <input type="hidden" id="modal_id" name="id" maxlength="10" placeholder=""
                                         class="form-control border-success text-uppercase"
-                                        onchange="obtenernombredelinput();">
+                                        onchange="obtenernombredelinput();" >
                                 </div>
                             </div><br>
                             <div class="row">
@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" maxlength="10" minlength="10" onkeypress="return SoloNumeros(event);" class="form-control"
-                                        id="Ecedu" name="Ecedu" />
+                                        id="Ecedu" name="Ecedu" required/>
                                 </div>
                             </div> <br>
                             <div class="row">
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" onkeypress="return SoloLetras(event);" class="form-control"
-                                        id="Enom" name="Enom" />
+                                        id="Enom" name="Enom" required/>
                                 </div>
                             </div> <br>
                             <div class="row">
@@ -37,7 +37,15 @@
                                     <label>Email:</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="email" onchange="validarcorreo();" id="Email" name="Email" class="form-control" />
+                                    <input type="email"  id="Email" name="Email" class="form-control" required/>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-md-3 text-right">
+                                    <label>password:</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" id="pas" name="pas" minlength="6" maxlength="6" class="form-control" required/>
                                 </div>
                             </div>
                         </div><br>
@@ -46,17 +54,17 @@
                                     <label>oficina :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text"  class="form-control"
-                                        id="Eofi" name="Eofi" />
+                                    <input type="text" class="form-control"
+                                        id="Eofi" name="Eofi" required/>
                                 </div>
                         </div> <br>
                         <div class="row">
                                 <div class="col-md-3 text-right">
-                                    <label>Rol :</label>
+                                    <label>Rol:</label>
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" onkeypress="return SoloLetras(event);" class="form-control"
-                                        id="Epo" name="Epo" />
+                                        id="Epo" name="Epo" required/>
                                 </div>
                         </div> <br>
                         <div class="row">
@@ -65,59 +73,22 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text"  class="form-control"
-                                        id="Edire" name="Edire" />
+                                        id="Edire" name="Edire" required/>
                                 </div>
                             </div> <br>
                         <center>
                             <div class="row text-center">
                                 <div class="col-md-4"><button type="reset" class="btn btn-dark">LIMPIAR CAMPOS</button>
                                 </div>
-                                <div class="col-md-4"><input class="btn btn-danger" type="submit"
+                                <div class="col-md-4"><input class="btn btn-info text-white" type="submit"
                                         value="Enviar formulario" /></div>
                             </div>
                         </center>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="cerrarModal()" class="btn btn-danger">CERRAR</button>
+                    <button type="button" onclick="cerrarModal2()" class="btn btn-danger">CERRAR</button>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-    $(document).ready(function () {
-        // Utilizar un evento delegado para manejar los clics en los botones "Editar"
-        $('#tablita').on('click', 'button[data-action="editar"]', function () {
-            // Obtener referencias a los elementos del DOM
-            var $row = $(this).closest('tr');
-            var id = $row.find('input[name="id"]').val();
-            var cedula = $row.find('td:eq(0)').text();
-            var nombre = $row.find('td:eq(1)').text();
-            var email = $row.find('td:eq(2)').text();
-            var oficina = $row.find('td:eq(3)').text();
-            var Position = $row.find('td:eq(4)').text();
-            var dire = $row.find('td:eq(5)').text();
-
-            // Verificar si se encontraron los valores
-            if (id && cedula &&nombre && email && oficina && Position && dire) {
-                // Llenar el modal con los valores de la fila seleccionada
-                $('#modal_id').val(id);
-                $('#Ecedu').val(cedula);
-                $('#Enom').val(nombre);
-                $('#Email').val(email);
-                $('#Eofi').val(oficina);
-                $('#Epo').val(Position);
-                $('#Edire').val(dire);
-                $('#mimodal').modal('show');
-            } else {
-                console.error('No se encontraron los valores necesarios para editar.');
-            }
-        });
-    });
-</script>
-
-<style>
-    .borde{
-        border-radius: 30px;
-    }
-</style>
