@@ -50,9 +50,12 @@ class TasksController
 
         // Preparar la declaración
         $stmt = $conn->prepare($sql);
+        //incriptar lo contraseña
+        $password = $_POST['pas'];
+        $hash = password_hash($password, PASSWORD_DEFAULT);
 
         // Vincular parámetros
-        $stmt->bind_param("sssssssi", $_POST['Ecedu'], $_POST['Enom'], $_POST['Email'], $_POST['pas'], $_POST['Epo'], $_POST['Eofi'], $_POST['Edire'], $estado);
+        $stmt->bind_param("sssssssi", $_POST['Ecedu'], $_POST['Enom'], $_POST['Email'], $hash, $_POST['Epo'], $_POST['Eofi'], $_POST['Edire'], $estado);
 
         // Valor predeterminado para el estado
         $estado = 1;

@@ -53,10 +53,33 @@ class QueryBuilder
     }
     public function update($table, $id, $params)
 {
+    // Suponiendo que el campo de cédula se llama 'cedula'
+    if (isset($params['cedula'])) {
+        $cedula = $params['cedula'];
+       
+        // Verificar si la cédula ya existe en la tabla
+        $checkSql = "SELECT COUNT(*) FROM {$table} WHERE cedula = '{$cedula}' AND id_e != {$id}";
+        try {
+            $result = $this->pdo->query($checkSql);
+            $count = $result->fetchColumn();
+            
+            if ($count > 0) {
+                // Si la cédula ya existe, enviar una alerta
+                $mensaje = "Cédula {$cedula} ya registrada.";
+                header("Location: index.php?url=tables&mensaje=" . urlencode($mensaje)); // Redirección después de 3 segundos
+            exit();
+                // die("La cédula {$cedula} ya está registrada.");
+            }
+        } catch (\PDOException $ERROR) {
+            die($ERROR->getMessage());
+        }
+    }
     // Construir la parte SET de la consulta SQL con los valores directamente
     $cols = implode(', ', array_map(function($key, $value) {
         return "{$key}='{$value}'";
     }, array_keys($params), $params));
+
+
     
     // Construir la consulta SQL
     $sql = "UPDATE {$table} SET {$cols} WHERE {$id}={$id}";
