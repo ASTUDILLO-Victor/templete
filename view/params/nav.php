@@ -74,6 +74,11 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?url=graficos">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>graficos</span></a>
+            </li>
 
         
             

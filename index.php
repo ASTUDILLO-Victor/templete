@@ -11,14 +11,16 @@ $routes =
     
     'templete' => ['HomeController','show'],
     'tables' => ['PagesController','tables'],
-    'services' => ['PagesController','services'],
-    'contact' => ['PagesController','contact'],
+    // 'services' => ['PagesController','services'],
+    // 'contact' => ['PagesController','contact'],
     'crear' => ['TasksController','create'],
     'actualizar' => ['TasksController','toggle'],
     'eliminar' => ['TasksController','delete'],
     'login-form'=>['LoginController','show'] ,
     'login'=>['LoginController','login'] ,
     'logout'=> ['LoginController','logout'],
+    'graficos'=> ['PagesController','grafico'],
+
 ];
 $url = isset($_GET['url']) ? $_GET['url'] : 'login-form';
 // $url = isset($_GET['url']) ? $_GET['url'] : 'login-form';

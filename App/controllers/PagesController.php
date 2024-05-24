@@ -35,10 +35,10 @@ class PagesController
         }
 
     }
-    public function contact()
+    public function grafico()
     {
         if (Auth::check()) {
-            return view('contact');
+            return view('grafico');
         } else {
             return redirect('index.php?url=login-form');
              // Asegura que el script se detenga después de la redirección
