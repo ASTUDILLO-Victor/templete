@@ -10859,9 +10859,12 @@ a:focus {
     height: calc(20rem - 43px) !important;
   }
 }
-
+.ima{
+  width: 600;
+  height: 800;
+}
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background-image: url('img/Uventanas.jpg');
   background-position: center;
   background-size: cover;
 }
