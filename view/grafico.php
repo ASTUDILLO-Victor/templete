@@ -1,4 +1,4 @@
-<?= require "params/nav.php";
+<?php require "params/nav.php";
 require "modal/modal.php";
 require "modal/modal2.php";
 
