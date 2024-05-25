@@ -28,7 +28,7 @@
                                     <label>Nombre :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" onkeypress="return SoloLetras(event);" class="form-control"
+                                    <input type="text" onkeypress="return SoloLetras(event);" class="form-control toUpperCase()"
                                         id="Enom" name="Enom" required/>
                                 </div>
                             </div> <br>
