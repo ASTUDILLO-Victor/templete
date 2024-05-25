@@ -1,4 +1,4 @@
-<?= require "params/nav.php" ?>
+<?php require "params/nav.php" ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->

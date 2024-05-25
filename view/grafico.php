@@ -1,4 +1,8 @@
-<?= require "params/nav.php" ?>
+<?= require "params/nav.php";
+require "modal/modal.php";
+require "modal/modal2.php";
+
+?>
 
 
 <!-- End of Topbar -->
@@ -32,8 +36,7 @@
 
 </div>
 <!-- End of Main Content -->
-<?= require "modal/modal.php" ?>
-<?= require "modal/modal2.php" ?>
+
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
