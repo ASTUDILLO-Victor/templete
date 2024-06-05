@@ -23,6 +23,47 @@ class Model
 
 
     }
+    public static function all2()
+    {
+        $model = new static;
+        $rows = App::get('database')->selectAll2($model->getTable());
+        return array_map(fn($row) => new static($row), $rows);
+
+
+    }
+    public static function all3()
+    {
+        $model = new static;
+        $rows = App::get('database')->selectAll3($model->getTable());
+        return array_map(fn($row) => new static($row), $rows);
+
+
+    }
+    public static function all4()
+    {
+        $model = new static;
+        $rows = App::get('database')->selectAll4($model->getTable());
+        return array_map(fn($row) => new static($row), $rows);
+
+
+    }
+    public static function all5()
+    {
+        $model = new static;
+        $rows = App::get('database')->selectAll5($model->getTable2());
+        return array_map(fn($row) => new static($row), $rows);
+
+
+    }
+    public static function all6()
+    {
+        $model = new static;
+        $rows = App::get('database')->selectAll6($model->getTable2());
+        return array_map(fn($row) => new static($row), $rows);
+
+
+    }
+   
     public static function create($properties)
     {
         $model = new static($properties);
@@ -45,6 +86,24 @@ class Model
 
         return $this;
     }
+    public function delete2()
+    {
+        App::get('database')->delete2($this->getTable(), $this->properties[$this->getid()]);
+
+        return $this;
+    }
+    public function delete3()
+    {
+        App::get('database')->delete3($this->getTable(), $this->properties[$this->getid()]);
+
+        return $this;
+    }
+    public function delete4()
+    {
+        App::get('database')->delete4($this->getTable(), $this->properties[$this->getid()]);
+
+        return $this;
+    }
     // actualizar
     public static function find($id)
     {
@@ -53,6 +112,7 @@ class Model
         $model->setProperties($properties);
         return $model;
     }
+    
 
     public static function findBy($param)
     {
@@ -75,6 +135,11 @@ class Model
     public function getTable()
     {
         return $this->table;
+
+    }
+    public function getTable2()
+    {
+        return $this->table2;
 
     }
     public function getid()

@@ -5,7 +5,7 @@ return [
     'database' => [
         'type' => 'mysql',
         'host' => '127.0.0.1',
-        'database' => 'todos',
+        'database' => 'proyecto',
         'user' => 'root',
         'password' => '',
     ],

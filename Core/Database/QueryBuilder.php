@@ -12,10 +12,47 @@ class QueryBuilder
     }
     public function selectAll($table)
     {
-        $query = $this->pdo->prepare("SELECT * FROM {$table} where estado=1");
+        // $query = $this->pdo->prepare("SELECT * FROM {$table} where estado=1");
+        $query = $this->pdo->prepare("SELECT e.id_e,e.cedula, e.name,e.ape,e.email,r.nombre,e.sexo,e.celu,e.fecha,e.dire FROM {$table} e JOIN rol r on e.id_rol=r.id_rol where e.estado=1");
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public function selectAll2($table)
+    {
+        $query = $this->pdo->prepare("SELECT e.id_e,e.cedula, e.name,e.ape,e.email,r.nombre,e.sexo,e.celu,e.fecha,e.dire FROM {$table} e JOIN rol r on e.id_rol=r.id_rol where e.estado=0");
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public function selectAll3($table)
+    {
+        // $query = $this->pdo->prepare("SELECT * FROM {$table} where estado=1 AND id_rol='3'");
+        $query = $this->pdo->prepare("SELECT e.id_e,e.cedula, e.name,e.ape,e.email,r.nombre,e.sexo,e.celu,e.fecha,e.dire FROM {$table} e JOIN rol r on e.id_rol=r.id_rol where e.estado = 1 
+        AND r.id_rol NOT IN (1, 2)");
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function selectAll4($table)
+    {
+        // $query = $this->pdo->prepare("SELECT * FROM {$table} where estado=0 AND id_rol='3'");
+        $query = $this->pdo->prepare("SELECT e.id_e,e.cedula, e.name,e.ape,e.email,r.nombre,e.sexo,e.celu,e.fecha,e.dire FROM {$table} e JOIN rol r on e.id_rol=r.id_rol where e.estado = 0 
+        AND r.id_rol NOT IN (1, 2)");
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public function selectAll5($table2)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM {$table2}");
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public function selectAll6($table2)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM {$table2} where id_rol NOT IN (1, 2)");
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+   
 
     public function find($table, $id)
     {
@@ -41,7 +78,7 @@ class QueryBuilder
         $cols = implode(', ', array_keys($params));
         
         $placeholders = ':' . implode(', :', array_keys($params));
-        $sql = "INSERT INTO {$table} (id_e, cedula, name, email, password, posición, oficina, direcion, estado) VALUES ({$placeholders})";
+        $sql = "INSERT INTO {$table} (id_e, cedula, name, email, password, posición, estado) VALUES ({$placeholders})";
         
         try {
             $stmt = $this->pdo->prepare($sql);
@@ -56,7 +93,6 @@ class QueryBuilder
     // Suponiendo que el campo de cédula se llama 'cedula'
     if (isset($params['cedula'])) {
         $cedula = $params['cedula'];
-       
         // Verificar si la cédula ya existe en la tabla
         $checkSql = "SELECT COUNT(*) FROM {$table} WHERE cedula = '{$cedula}' AND id_e != {$id}";
         try {
@@ -82,7 +118,7 @@ class QueryBuilder
 
     
     // Construir la consulta SQL
-    $sql = "UPDATE {$table} SET {$cols} WHERE {$id}={$id}";
+    $sql = "UPDATE {$table} SET {$cols} WHERE id_e={$id}";
     
     // Encerrar en un try/catch por si ocurre un error
     try {
@@ -98,6 +134,63 @@ class QueryBuilder
         //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
         // $sql="DELETE From {$table}  WHERE id=:id";
         $sql = "UPDATE  {$table} SET estado= 0 WHERE id_e=:id";
+
+        // encerramos en un try/cactch por si llega a suceder un error 
+        try {
+            $query = $this->pdo->prepare($sql);
+            //placeholder :name
+            //en el arrar tengo ['name'=> 'victor']
+            //se guardara en el placeholder victor
+            $query->execute(['id' => $id]);
+        } catch (\PDOException $ERROR) {
+            die($ERROR->getMessage());
+        }
+
+    }
+    public function delete2($table, $id)
+    {
+        // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
+        //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
+        // $sql="DELETE From {$table}  WHERE id=:id";
+        $sql = "UPDATE  {$table} SET estado= 1 WHERE id_e=:id";
+
+        // encerramos en un try/cactch por si llega a suceder un error 
+        try {
+            $query = $this->pdo->prepare($sql);
+            //placeholder :name
+            //en el arrar tengo ['name'=> 'victor']
+            //se guardara en el placeholder victor
+            $query->execute(['id' => $id]);
+        } catch (\PDOException $ERROR) {
+            die($ERROR->getMessage());
+        }
+
+    }
+    public function delete3($table, $id)
+    {
+        // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
+        //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
+        // $sql="DELETE From {$table}  WHERE id=:id";
+        $sql = "UPDATE  {$table} SET estado= 0 WHERE id_e=:id";
+
+        // encerramos en un try/cactch por si llega a suceder un error 
+        try {
+            $query = $this->pdo->prepare($sql);
+            //placeholder :name
+            //en el arrar tengo ['name'=> 'victor']
+            //se guardara en el placeholder victor
+            $query->execute(['id' => $id]);
+        } catch (\PDOException $ERROR) {
+            die($ERROR->getMessage());
+        }
+
+    }
+    public function delete4($table, $id)
+    {
+        // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
+        //CON LOS : HACE QUE PDO REMPLACE CON LOS VALORES QUE GUARDAN EN EL INDICE
+        // $sql="DELETE From {$table}  WHERE id=:id";
+        $sql = "UPDATE  {$table} SET estado= 1 WHERE id_e=:id";
 
         // encerramos en un try/cactch por si llega a suceder un error 
         try {

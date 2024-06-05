@@ -1,3 +1,8 @@
+<?php 
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>AireSafe - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,6 +24,9 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script  src="js/modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 
@@ -41,23 +49,22 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Login - AireSafe </h1>
                                     </div>
                                     <form class="user" action="index.php?url=login" method="POST">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                             id="email" name="email" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                placeholder="Ingrese correo" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                            id="password" name="password" type="password" placeholder="Password">
+                                            id="password" name="password" type="password" placeholder="Ingrese contraseña" required>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <label class="custom-control-label" for="customCheck"> Recuerdame</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -67,8 +74,10 @@
                                         
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                    <div class="col-lg-12">
+                                        <div class="row justify-content-center">
+                                            <a href="index.php?url=recuperar">Olvidaste Contraseña</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +100,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/validar.js"></script>
+    
 
 </body>
 
 </html>
+<?= require "notificacion/noti.php" ?>

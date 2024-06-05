@@ -11,15 +11,28 @@ $routes =
     
     'templete' => ['HomeController','show'],
     'tables' => ['PagesController','tables'],
-    // 'services' => ['PagesController','services'],
-    // 'contact' => ['PagesController','contact'],
+    'tables2' => ['PagesController','tables2'],
+    'tables3' => ['PagesController','tables3'],
+    'tables4' => ['PagesController','tables4'],
+    'registro' => ['PagesController','registro'],
     'crear' => ['TasksController','create'],
     'actualizar' => ['TasksController','toggle'],
     'eliminar' => ['TasksController','delete'],
+    'eliminar2' => ['TasksController','delete2'],
+    'eliminar3' => ['TasksController','delete3'],
+    'eliminar4' => ['TasksController','delete4'],
     'login-form'=>['LoginController','show'] ,
     'login'=>['LoginController','login'] ,
     'logout'=> ['LoginController','logout'],
     'graficos'=> ['PagesController','grafico'],
+    'registarlogin'=>['TasksController','registrar'],
+    'validar'=>['TasksController','validar'],
+    'recuperar'=>['recuperarControllers','show'],
+    'recuperar2'=>['recuperarControllers','recuperar'],
+    'resta'=>['PagesController','resta'],
+    
+
+
 
 ];
 $url = isset($_GET['url']) ? $_GET['url'] : 'login-form';

@@ -2,6 +2,6 @@
 namespace App\models;
 class User extends Model
 {
-    protected $table = "users";
+    protected $table = "rol";
 
 }
