@@ -94,8 +94,9 @@
                                         </div>
                                         <input type="password" id="pas" name="pas" minlength="6" maxlength="12"
                                             class="form-control" required disabled />
+                                            <span id="campoOK"></span>
                                             <span class="help-text">La contraseña debe tener de 6 a 12 caracteres, ademas puede incluir caracteres especiales</span>
-                                        
+                                           
                                     </div>
                                     
                                 </div>
@@ -401,4 +402,21 @@ $(document).ready(function () {
         }
     });
 });
+</script>
+<script>
+    document
+  .getElementById('pass')
+  .addEventListener('input', function(evt) {
+    const campo = evt.target,
+          valido = document.getElementById('campoOK'),
+        
+          regex = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
+
+    //Se muestra un texto válido/inválido a modo de ejemplo
+    if (regex.test(campo.value)) {
+      valido.innerText = "válido";
+    } else {
+      valido.innerText = "incorrecto";
+    }
+  });
 </script>
