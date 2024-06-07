@@ -94,12 +94,16 @@
                                         </div>
                                         <input type="password" id="pas" name="pas" minlength="6" maxlength="12"
                                             class="form-control" required disabled />
+                                            
+                                            <span class="help-text"> contraseña debe tener de 6 a 12 caracteres, ademas puede incluir caracteres especiales</span>
+                                            <br>
                                             <span id="campoOK"></span>
-                                            <span class="help-text">La contraseña debe tener de 6 a 12 caracteres, ademas puede incluir caracteres especiales</span>
-                                           
+                                            
+                                        
                                     </div>
                                     
                                 </div>
+                                
                             </div>
                                 <!-- Código específico para usuarios -->
                                 <div class="col-md-6">
@@ -404,19 +408,25 @@ $(document).ready(function () {
 });
 </script>
 <script>
-    document
-  .getElementById('pass')
-  .addEventListener('input', function(evt) {
-    const campo = evt.target,
-          valido = document.getElementById('campoOK'),
-        
-          regex = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
+        const passwordInput = document.getElementById('pas');
+        const validityIndicator = document.getElementById('campoOK');
+        const submitButton = document.getElementById('btnenviar');
+        const regex = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
 
-    //Se muestra un texto válido/inválido a modo de ejemplo
-    if (regex.test(campo.value)) {
-      valido.innerText = "válido";
-    } else {
-      valido.innerText = "incorrecto";
-    }
-  });
-</script>
+        passwordInput.addEventListener('input', function(evt) {
+            const campo = evt.target;
+
+            if (regex.test(campo.value)) {
+                validityIndicator.innerText = "válido";
+                validityIndicator.style.color = "green";
+                campo.style.border = "2px solid green";
+                submitButton.disabled = false;
+            } else {
+                validityIndicator.innerText = "incorrecto";
+                validityIndicator.style.color = "red";
+                campo.style.border = "2px solid red";
+                submitButton.disabled = true;
+            }
+        });
+    </script>
+   
