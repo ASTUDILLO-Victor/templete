@@ -94,14 +94,15 @@
                                         </div>
                                         <input type="password" id="pas" name="pas" minlength="6" maxlength="12"
                                             class="form-control" required disabled />
-                                            
-                                            <span class="help-text"> contraseña debe tener de 6 a 12 caracteres, ademas puede incluir caracteres especiales</span>
+                                            <span class="help-text"> 
+                                                    La contraseña debe tener de 6 a 12 caracteres
+                                                    incluir caracteres especiales como: !@#$%^&*(),.?":{}|<>]
+                                                    incluir una Mayusculas
+                                                    Incluir una minuscula
+                                            </span>
                                             <br>
-                                            <span id="campoOK"></span>
-                                            
-                                        
                                     </div>
-                                    
+                                    <span id="campoOK"></span>
                                 </div>
                                 
                             </div>
@@ -328,12 +329,6 @@
             field.setCustomValidity("");
         }
     }
-
-
-
-
-
-
     // validar cedula 
     $("#Ecedu").on("keyup", function () {
     var cedula = $("#Ecedu").val(); // Capturando el valor de input con id cedula
@@ -411,7 +406,7 @@ $(document).ready(function () {
         const passwordInput = document.getElementById('pas');
         const validityIndicator = document.getElementById('campoOK');
         const submitButton = document.getElementById('btnenviar');
-        const regex = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
+        const regex = /^(?=.*\d)(?=.*[a-záéíóúüñ])(?=.*[A-ZÁÉÍÓÚÜÑ])(?=.*[!@#$%^&*(),.?":{}|<>])/;
 
         passwordInput.addEventListener('input', function(evt) {
             const campo = evt.target;
@@ -419,14 +414,24 @@ $(document).ready(function () {
             if (regex.test(campo.value)) {
                 validityIndicator.innerText = "válido";
                 validityIndicator.style.color = "green";
-                campo.style.border = "2px solid green";
+                campo.classList.remove('input-invalid');
+                campo.classList.add('input-valid');
                 submitButton.disabled = false;
             } else {
                 validityIndicator.innerText = "incorrecto";
                 validityIndicator.style.color = "red";
-                campo.style.border = "2px solid red";
+                campo.classList.remove('input-valid');
+                campo.classList.add('input-invalid');
                 submitButton.disabled = true;
             }
         });
     </script>
-   
+<style>
+        .input-valid {
+            background-color: lightgreen;
+        }
+        .input-invalid {
+            background-color: lightcoral;
+        }
+    </style>
+    

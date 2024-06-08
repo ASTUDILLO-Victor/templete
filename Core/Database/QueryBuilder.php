@@ -73,21 +73,33 @@ class QueryBuilder
     }
 
     public function create($table, $params)
-    {
-        // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
-        $cols = implode(', ', array_keys($params));
+{
+    // Validación y saneamiento de datos
+    $params = array_map('htmlspecialchars', $params);
+
+    // Preparar los nombres de las columnas y los placeholders
+    $cols = implode(', ', array_keys($params));
+    $placeholders = ':' . implode(', :', array_keys($params));
+
+    // Construir la consulta SQL
+    $sql = "INSERT INTO {$table} ({$cols}) VALUES ({$placeholders})";
+
+    try {
+        $stmt = $this->pdo->prepare($sql);
         
-        $placeholders = ':' . implode(', :', array_keys($params));
-        $sql = "INSERT INTO {$table} (id_e, cedula, name, email, password, posición, estado) VALUES ({$placeholders})";
-        
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute($params);
-        } catch (\PDOException $ERROR) {
-            die($ERROR->getMessage());
+        // Bind parameters
+        foreach ($params as $key => &$value) {
+            $stmt->bindParam(':' . $key, $value);
         }
 
+        // Ejecutar la consulta
+        $stmt->execute();
+    } catch (\PDOException $e) {
+        // Gestión de errores
+        error_log($e->getMessage());
+        die("Error al insertar datos en la base de datos.");
     }
+}
     public function update($table, $id, $params)
 {
     // Suponiendo que el campo de cédula se llama 'cedula'

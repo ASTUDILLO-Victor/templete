@@ -8,49 +8,88 @@ class TasksController
 {
     public function create()
     {
-        // todo el create cambio ya pude hacer que me funcione el codigo del querybilder
-        // Validación y saneamiento de datos
-        $cedula = filter_input(INPUT_POST, 'Ecedu', FILTER_SANITIZE_STRING);
-        $name = filter_input(INPUT_POST, 'Enom', FILTER_SANITIZE_STRING);
-        $ape = filter_input(INPUT_POST, 'Eape', FILTER_SANITIZE_STRING);
-        $email = filter_input(INPUT_POST, 'Email', FILTER_VALIDATE_EMAIL);
-        $password = password_hash(filter_input(INPUT_POST, 'pas', FILTER_SANITIZE_STRING), PASSWORD_DEFAULT);
-        $id_rol = filter_input(INPUT_POST, 'Epo', FILTER_SANITIZE_NUMBER_INT);
-        $sexo = filter_input(INPUT_POST, 'Ese', FILTER_SANITIZE_STRING);
-        $celu = filter_input(INPUT_POST, 'Ecelu', FILTER_SANITIZE_STRING);
-        $fecha = filter_input(INPUT_POST, 'Efe', FILTER_SANITIZE_STRING);
-        $dire = filter_input(INPUT_POST, 'Edire', FILTER_SANITIZE_STRING);
-        $tabla = filter_input(INPUT_POST, 'tabla', FILTER_SANITIZE_STRING);
-    
-        // Comprobación de campos obligatorios
-        if (!$cedula || !$name || !$ape || !$email || !$password || !$id_rol || !$sexo || !$celu || !$fecha || !$dire) {
-            header("Location: index.php?url=form&&error=missing_fields");
+         // Validar campos vacíos
+    $required_fields = ['Ecedu', 'Enom', 'Eape', 'Email', 'pas', 'Epo', 'Ese', 'Ecelu', 'Efe', 'Edire', 'tabla'];
+    foreach ($required_fields as $field) {
+        if (empty($_POST[$field])) {
+            $mensaje = "Todos los campos son obligatorios. Por favor, llene todos los campos.";
+            header("Location: formulario.php?tables&mensaje=" . urlencode($mensaje));
             exit();
         }
-    
-        try {
-            // Crear nuevo empleado
-            empleado::create([
-                'cedula' => $cedula,
-                'name' => $name,
-                'ape' => $ape,
-                'email' => $email,
-                'password' => $password,
-                'id_rol' => $id_rol,
-                'sexo' => $sexo,
-                'celu' => $celu,
-                'fecha' => $fecha,
-                'dire' => $dire,
-            ]);
-        } catch (\Exception $e) {
-            header("Location: index.php?url=form&&error=database_error");
-            exit();
-        }
-    
-        // Redireccionar según la tabla
-        $location = ($tabla == "tables") ? "index.php?url=tables&&success=1" : "index.php?url=tables3&&success1=1";
-        header("Location: $location");
+    }
+
+    // Validar y sanitizar los datos de entrada
+    $cedula = filter_var($_POST['Ecedu'], FILTER_SANITIZE_STRING);
+    $name = filter_var($_POST['Enom'], FILTER_SANITIZE_STRING);
+    $apellido = filter_var($_POST['Eape'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['Email'], FILTER_VALIDATE_EMAIL);
+    $password = $_POST['pas'];
+    $id_rol = filter_var($_POST['Epo'], FILTER_SANITIZE_NUMBER_INT);
+    $sexo = filter_var($_POST['Ese'], FILTER_SANITIZE_STRING);
+    $celular = filter_var($_POST['Ecelu'], FILTER_SANITIZE_STRING);
+    $fecha = filter_var($_POST['Efe'], FILTER_SANITIZE_STRING);
+    $direccion = filter_var($_POST['Edire'], FILTER_SANITIZE_STRING);
+    $tabla = filter_var($_POST['tabla'], FILTER_SANITIZE_STRING);
+
+    // Verificar que el email es válido
+    if (!$email) {
+        $mensaje = "Correo electrónico no válido.";
+        header("Location: formulario.php?tables&mensaje=" . urlencode($mensaje));
         exit();
+    }
+
+    // Parámetros de conexión a la base de datos
+    $servername = getenv('DB_HOST') ?: 'localhost';
+    $username = getenv('DB_USER') ?: 'root';
+    $password = getenv('DB_PASS') ?: '';
+    $database = getenv('DB_NAME') ?: 'proyecto';
+
+    $conn = new \mysqli($servername, $username, $password, $database);
+
+    // Manejo de errores en la conexión
+    if ($conn->connect_error) {
+        error_log("Conexión fallida: " . $conn->connect_error);
+        die("Conexión fallida. Por favor, intente más tarde.");
+    }
+
+    // Hash de la contraseña
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $estado = 1;
+
+    $sql = "INSERT INTO empleado (cedula, name, ape, email, password, id_rol, estado, sexo, celu, fecha, dire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        error_log("Error en la preparación de la consulta: " . $conn->error);
+        die("Error en la preparación de la consulta. Por favor, intente más tarde.");
+    }
+
+    $stmt->bind_param(
+        "ssssssissss",
+        $cedula,
+        $name,
+        $apellido,
+        $email,
+        $hash,
+        $id_rol,
+        $estado,
+        $sexo,
+        $celular,
+        $fecha,
+        $direccion
+    );
+
+    if (!$stmt->execute()) {
+        error_log("Error en la ejecución de la consulta: " . $stmt->error);
+        die("Error en la ejecución de la consulta. Por favor, intente más tarde.");
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    // Redirección basada en el valor de la tabla
+    $location = ($tabla == "tables") ? "index.php?url=tables&&success=1" : "index.php?url=tables3&&success1=1";
+    header("Location: $location");
+    exit();
     }
 
     public function toggle()
