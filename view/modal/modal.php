@@ -49,19 +49,6 @@
                                     <input type="email" onchange="validarcorreo(Email);" id="Email" name="Email" class="form-control" required/>
                                 </div>
                             </div>
-                            <!-- <div class="form-group">
-                                <label for="Epo">Rol:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
-                                    </div>
-                                    <select id="Epo" class="form-control" name="Epo">
-                                        <option value="1">SuperAdmin</option>
-                                        <option value="2">Admin</option>
-                                        <option value="3">Usuario</option>
-                                    </select>
-                                </div>
-                            </div> -->
                             
                         <!-- Código específico para usuarios -->
                             <div class="form-group">
@@ -148,40 +135,7 @@
     </div>
 </div>
 
-<script>
-$(document).ready(function () {
-    $('#tablita').on('click', 'button[data-action="editar"]', function () {
-        var $row = $(this).closest('tr');
-        var id = $row.find('input[name="id"]').val();
-        var cedula = $row.find('td:eq(0)').text();
-        var nombre = $row.find('td:eq(1)').text();
-        var ape = $row.find('td:eq(2)').text();
-        var email = $row.find('td:eq(3)').text();
-        var Rol = $row.find('td:eq(4)').text();
-        var sex = $row.find('td:eq(5)').text();
-        var celu= $row.find('td:eq(6)').text();
-        var fecha = $row.find('td:eq(7)').text();
-        var dire = $row.find('td:eq(8)').text();
 
-        if (id && cedula &&nombre && ape && email && Rol && sex && celu && fecha && dire ) {
-            $('#modal_id').val(id);
-            $('#Ecedu').val(cedula);
-            $('#Enom').val(nombre);
-            $('#Eape').val(ape);
-            $('#Email').val(email);
-            $('#Epo').val(Rol);
-            $('#Ese').val(sex);
-            $('#Ecelu').val(celu);
-            $('#Efe').val(fecha);
-            $('#Edire').val(dire);
-            
-            $('#mimodal').modal('show');
-        } else {
-            console.error('No se encontraron los valores necesarios para editar.');
-        }
-    });
-});
-</script>
 
 <style>
 .borde {
