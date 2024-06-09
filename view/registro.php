@@ -52,7 +52,7 @@
                                             onkeypress="return SoloNumeros(event);" class="form-control" id="Ecedu"
                                             name="Ecedu" oninput="validar()" required />
                                     </div>
-                                    <div id="salida" class="text-danger"></div>
+                                    <div id="salida" class=""></div>
                                     <div id="respuesta"></div>
                                 </div>
                                 <div class="form-group">
@@ -283,5 +283,6 @@
         .input-invalid {
             background-color: lightcoral;
         }
+        
     </style>
     

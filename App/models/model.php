@@ -71,6 +71,13 @@ class Model
 
         return $model;
     }
+    public static function select($properties)
+    {
+        $model = new static($properties);
+        $model->save2();
+
+        return $model;
+    }
 
     public function update($properties)
 {
@@ -130,6 +137,13 @@ class Model
             throw new \Exception("El nombre de la tabla no fue definido");
         }
         App::get('database')->create($this->table, $this->properties);
+    }
+    public function save2($name = null)
+    {
+        if (empty($this->table)) {
+            throw new \Exception("El nombre de la tabla no fue definido");
+        }
+        App::get('database')->select($this->table, $this->properties);
     }
 
     public function getTable()

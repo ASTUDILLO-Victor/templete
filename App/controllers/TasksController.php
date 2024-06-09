@@ -169,69 +169,8 @@ public function delete4()
     //validar cedula 
     public function validar()
     {
-        $usuario = "root";
-        $password = "";
-        $servidor = "localhost";
-        $basededatos = "proyecto";
-        $con = mysqli_connect($servidor, $usuario, $password) or die("No se ha podido conectar al Servidor");
-        mysqli_query($con, "SET SESSION collation_connection ='utf8_unicode_ci'");
-        $db = mysqli_select_db($con, $basededatos) or die("Upps! Error en conectar a la Base de Datos");
-
-        $cedula = $_REQUEST['cedula'];
-
-        //Verificando si existe algun cliente en bd ya con dicha cedula asignada
-//Preparamos un arreglo que es el que contendrá toda la información
-        $jsonData = array();
-        $selectQuery = ("SELECT cedula FROM empleado WHERE cedula='" . $cedula . "' ");
-        $query = mysqli_query($con, $selectQuery);
-        $totalCliente = mysqli_num_rows($query);
-
-        //Validamos que la consulta haya retornado información
-        if ($totalCliente <= 0) {
-            $jsonData['success'] = 0;
-            // $jsonData['message'] = 'No existe Cédula ' .$cedula;
-            $jsonData['message'] = '';
-        } else {
-            //Si hay datos entonces retornas algo
-            $jsonData['success'] = 1;
-            $jsonData['message'] = '<p style="color:red;">Ya existe la Cédula <strong>(' . $cedula . ')<strong></p>';
-        }
-
-        //Mostrando mi respuesta en formato Json
-        header('Content-type: application/json; charset=utf-8');
-        echo json_encode($jsonData);
+        empleado::select([
+            'cedula' => $_REQUEST['cedula'],    
+        ]);
     }
-    public function validar_correo()
-{
-    $usuario = "root";
-    $password = "";
-    $servidor = "localhost";
-    $basededatos = "proyecto";
-    $con = mysqli_connect($servidor, $usuario, $password) or die("No se ha podido conectar al Servidor");
-    mysqli_query($con, "SET SESSION collation_connection ='utf8_unicode_ci'");
-    $db = mysqli_select_db($con, $basededatos) or die("Upps! Error en conectar a la Base de Datos");
-
-    $email = $_REQUEST['email'];
-
-    // Verificando si existe algún cliente en la BD ya con dicho correo electrónico asignado
-    $jsonData = array();
-    $selectQuery = ("SELECT email FROM empleado WHERE email='" . $email . "' ");
-    $query = mysqli_query($con, $selectQuery);
-    $totalCliente = mysqli_num_rows($query);
-
-    // Validamos que la consulta haya retornado información
-    if ($totalCliente <= 0) {
-        $jsonData['success'] = 0;
-        $jsonData['message'] = '';
-    } else {
-        // Si hay datos entonces retornas algo
-        $jsonData['success'] = 1;
-        $jsonData['message'] = '<p style="color:red;">Ya existe el correo electrónico <strong>(' . $email . ')<strong></p>';
-    }
-
-    // Mostrando mi respuesta en formato Json
-    header('Content-type: application/json; charset=utf-8');
-    echo json_encode($jsonData);
-}
-
 }

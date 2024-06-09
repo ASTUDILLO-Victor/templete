@@ -52,7 +52,7 @@ class QueryBuilder
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
-   
+
 
     public function find($table, $id)
     {
@@ -73,73 +73,121 @@ class QueryBuilder
     }
 
     public function create($table, $params)
-{
-    // Validación y saneamiento de datos
-    $params = array_map('htmlspecialchars', $params);
+    {
+        // Validación y saneamiento de datos
+        $params = array_map('htmlspecialchars', $params);
 
-    // Preparar los nombres de las columnas y los placeholders
-    $cols = implode(', ', array_keys($params));
-    $placeholders = ':' . implode(', :', array_keys($params));
+        // Preparar los nombres de las columnas y los placeholders
+        $cols = implode(', ', array_keys($params));
+        $placeholders = ':' . implode(', :', array_keys($params));
 
-    // Construir la consulta SQL
-    $sql = "INSERT INTO {$table} ({$cols}) VALUES ({$placeholders})";
+        // Construir la consulta SQL
+        $sql = "INSERT INTO {$table} ({$cols}) VALUES ({$placeholders})";
 
-    try {
-        $stmt = $this->pdo->prepare($sql);
-        
-        // Bind parameters
-        foreach ($params as $key => &$value) {
-            $stmt->bindParam(':' . $key, $value);
-        }
-
-        // Ejecutar la consulta
-        $stmt->execute();
-    } catch (\PDOException $e) {
-        // Gestión de errores
-        error_log($e->getMessage());
-        die("Error al insertar datos en la base de datos.");
-    }
-}
-    public function update($table, $id, $params)
-{
-    // Suponiendo que el campo de cédula se llama 'cedula'
-    if (isset($params['cedula'])) {
-        $cedula = $params['cedula'];
-        // Verificar si la cédula ya existe en la tabla
-        $checkSql = "SELECT COUNT(*) FROM {$table} WHERE cedula = '{$cedula}' AND id_e != {$id}";
         try {
-            $result = $this->pdo->query($checkSql);
-            $count = $result->fetchColumn();
-            
-            if ($count > 0) {
-                // Si la cédula ya existe, enviar una alerta
-                $mensaje = "Cédula {$cedula} ya registrada.";
-                header("Location: index.php?url=tables&mensaje=" . urlencode($mensaje)); // Redirección después de 3 segundos
-            exit();
-                // die("La cédula {$cedula} ya está registrada.");
+            $stmt = $this->pdo->prepare($sql);
+
+            // Bind parameters
+            foreach ($params as $key => &$value) {
+                $stmt->bindParam(':' . $key, $value);
             }
+
+            // Ejecutar la consulta
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            // Gestión de errores
+            error_log($e->getMessage());
+            die("Error al insertar datos en la base de datos.");
+        }
+    }
+    public function select($table, $params)
+    {
+        // Validación y saneamiento de datos
+        // Validación y saneamiento de datos
+        $params = array_map('htmlspecialchars', $params);
+
+        // Preparar los nombres de las columnas y los placeholders
+        $col = array_keys($params)[0]; // En este caso, solo se necesita la primera columna
+        $placeholder = ':' . $col;
+
+        // Construir la consulta SQL
+        $sql = "SELECT {$col} FROM {$table} WHERE {$col} = {$placeholder}";
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+
+            // Bind parameter
+            $stmt->bindParam($placeholder, $params[$col]);
+
+            // Ejecutar la consulta
+            $stmt->execute();
+
+            // Obtener el número de filas
+            $totalCliente = $stmt->rowCount();
+
+            // Inicializar el array para JSON
+            $jsonData = [];
+
+            //Validamos que la consulta haya retornado información
+            if ($totalCliente <= 0) {
+                $jsonData['success'] = 0;
+                $jsonData['message'] = '';
+            } else {
+                //Si hay datos entonces retornas algo
+                $jsonData['success'] = 1;
+                $jsonData['message'] = '<p style="color:red;">Ya existe la Cédula <strong>(' . htmlspecialchars($params[$col]) . ')<strong></p>';
+            }
+
+            //Mostrando mi respuesta en formato Json
+            header('Content-type: application/json; charset=utf-8');
+            echo json_encode($jsonData);
+
+        } catch (\PDOException $e) {
+            // Gestión de errores
+            error_log($e->getMessage());
+            die("Error al seleccionar datos en la base de datos.");
+        }
+    }
+    public function update($table, $id, $params)
+    {
+        // Suponiendo que el campo de cédula se llama 'cedula'
+        if (isset($params['cedula'])) {
+            $cedula = $params['cedula'];
+            // Verificar si la cédula ya existe en la tabla
+            $checkSql = "SELECT COUNT(*) FROM {$table} WHERE cedula = '{$cedula}' AND id_e != {$id}";
+            try {
+                $result = $this->pdo->query($checkSql);
+                $count = $result->fetchColumn();
+
+                if ($count > 0) {
+                    // Si la cédula ya existe, enviar una alerta
+                    $mensaje = "Cédula {$cedula} ya registrada.";
+                    header("Location: index.php?url=tables&mensaje=" . urlencode($mensaje)); // Redirección después de 3 segundos
+                    exit();
+                    // die("La cédula {$cedula} ya está registrada.");
+                }
+            } catch (\PDOException $ERROR) {
+                die($ERROR->getMessage());
+            }
+        }
+        // Construir la parte SET de la consulta SQL con los valores directamente
+        $cols = implode(', ', array_map(function ($key, $value) {
+            return "{$key}='{$value}'";
+        }, array_keys($params), $params));
+
+
+
+        // Construir la consulta SQL
+        $sql = "UPDATE {$table} SET {$cols} WHERE id_e={$id}";
+
+        // Encerrar en un try/catch por si ocurre un error
+        try {
+            // Ejecutar la consulta directamente
+            $this->pdo->query($sql);
         } catch (\PDOException $ERROR) {
             die($ERROR->getMessage());
         }
     }
-    // Construir la parte SET de la consulta SQL con los valores directamente
-    $cols = implode(', ', array_map(function($key, $value) {
-        return "{$key}='{$value}'";
-    }, array_keys($params), $params));
-
-
-    
-    // Construir la consulta SQL
-    $sql = "UPDATE {$table} SET {$cols} WHERE id_e={$id}";
-    
-    // Encerrar en un try/catch por si ocurre un error
-    try {
-        // Ejecutar la consulta directamente
-        $this->pdo->query($sql);
-    } catch (\PDOException $ERROR) {
-        die($ERROR->getMessage());
-    }
-}
     public function delete($table, $id)
     {
         // este trae los indices de create-tasks y implode funciona para traer los datpos una lado de otro separados por la coma 
