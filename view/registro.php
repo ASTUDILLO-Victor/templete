@@ -85,6 +85,7 @@
                                             class="form-control" required disabled />
                                     </div>
                                     <div id="respuesta1"></div>
+                                    <div id="respuesta2"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="pas">Contraseña:</label>
@@ -265,116 +266,6 @@
 </body>
 
 </html>
-
-<script type="text/javascript">
-    function habilitarCampos(habilitar) {
-        const campos = ["Enom", "Eape", "Email", "pas", "Epo", "Ese", "Ecelu", "Efe", "Edire"];
-        campos.forEach(campo => {
-            document.getElementById(campo).disabled = !habilitar;
-        });
-    }
-
-    function validar() {
-        const cad = document.getElementById("Ecedu").value.trim();
-        let total = 0;
-        const longitud = cad.length;
-        const longcheck = longitud - 1;
-
-        if (cad !== "" && longitud === 10) {
-            for (let i = 0; i < longcheck; i++) {
-                if (i % 2 === 0) {
-                    let aux = cad.charAt(i) * 2;
-                    if (aux > 9) aux -= 9;
-                    total += aux;
-                } else {
-                    total += parseInt(cad.charAt(i)); // parseInt para convertir a número
-                }
-            }
-
-            total = total % 10 ? 10 - total % 10 : 0;
-
-            if (cad.charAt(longitud - 1) == total) {
-                document.getElementById("salida").innerHTML = "Cédula Válida";
-                habilitarCampos(true);
-            } else {
-                document.getElementById("salida").innerHTML = "Cédula Inválida";
-                habilitarCampos(false);
-            }
-        } else {
-            document.getElementById("salida").innerHTML = "";
-            habilitarCampos(false);
-        }
-    }
-
-    function SoloNumeros(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-    }
-
-    function SoloLetras(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode == 32)
-            return true;
-        return false;
-    }
-
-    function validarcorreo(field) {
-        const email = field.value;
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regex.test(email)) {
-            field.setCustomValidity("Correo electrónico no válido");
-        } else {
-            field.setCustomValidity("");
-        }
-    }
-    // validar cedula 
-    $("#Ecedu").on("keyup", function () {
-    var cedula = $("#Ecedu").val(); // Capturando el valor de input con id cedula
-    var longitudCedula = cedula.length; // Cuento longitud
-
-    // Valido la longitud
-    if (longitudCedula === 10) {
-        var dataString = 'cedula=' + cedula;
-
-        $.ajax({
-            url: 'index.php?url=validar',
-            type: "GET",
-            data: dataString,
-            dataType: "JSON",
-
-            success: function (datos) {
-                if (datos.success === 1) {
-                    $("#respuesta").html(datos.message);
-                    $("#Ecedu").attr('disabled', false); // Habilitando el input cedula (aunque parece innecesario)
-                    $("#btnEnviar").attr('disabled', true); // Deshabilito el botón
-                } else {
-                    $("#respuesta").html(datos.message);
-                    $("#btnenviar").attr('disabled', false); // Habilito el botón
-                }
-            },
-            error: function () {
-                // Manejo de errores
-                $("#respuesta").html("Error en la validación de la cédula.");
-                $("#btnenviar").attr('disabled', true); // Deshabilito el botón en caso de error
-            }
-        });
-    } else {
-        // Si la longitud no es 10, deshabilitar el botón y limpiar el mensaje de respuesta
-        $("#btnenviar").attr('disabled', true);
-        $("#respuesta").html("");
-    }
-});
-</script>
-<script>
-        document.getElementById('pass').addEventListener('focus', function() {
-            document.querySelector('.help-text').style.display = 'block';
-        });
-        document.getElementById('pass').addEventListener('blur', function() {
-            document.querySelector('.help-text').style.display = 'none';
-        });
-    </script>
 <style>
         .help-text {
             display: none;
@@ -385,47 +276,6 @@
             display: block;
         }
     </style>
-    <script>
-$(document).ready(function () {
-    // Validar email
-    $("#Email").on("keyup", function () {
-        var email = $("#Email").val();
-        var regex = /^[a-zA-Z0-9._%+-]+@(outlook\.com|outlook\.es)$/;
-
-        if (regex.test(email)) {
-            $("#respuesta1").html("Correo válido de Outlook.");
-            $("#btnenviar").attr('disabled', false);
-        } else {
-            $("#respuesta1").html("Por favor, ingrese un correo de Outlook válido.");
-            $("#btnenviar").attr('disabled', true);
-        }
-    });
-});
-</script>
-<script>
-        const passwordInput = document.getElementById('pas');
-        const validityIndicator = document.getElementById('campoOK');
-        const submitButton = document.getElementById('btnenviar');
-        const regex = /^(?=.*\d)(?=.*[a-záéíóúüñ])(?=.*[A-ZÁÉÍÓÚÜÑ])(?=.*[!@#$%^&*(),.?":{}|<>])/;
-
-        passwordInput.addEventListener('input', function(evt) {
-            const campo = evt.target;
-
-            if (regex.test(campo.value)) {
-                validityIndicator.innerText = "válido";
-                validityIndicator.style.color = "green";
-                campo.classList.remove('input-invalid');
-                campo.classList.add('input-valid');
-                submitButton.disabled = false;
-            } else {
-                validityIndicator.innerText = "incorrecto";
-                validityIndicator.style.color = "red";
-                campo.classList.remove('input-valid');
-                campo.classList.add('input-invalid');
-                submitButton.disabled = true;
-            }
-        });
-    </script>
 <style>
         .input-valid {
             background-color: lightgreen;

@@ -166,62 +166,6 @@ public function delete4()
 {
     return $this->delete1($_POST['id'], '4');
 }
-
-    public function registrar()
-    {
-        if (empty($_POST['Ecedu']) || empty($_POST['Enom']) || empty($_POST['Email']) || empty($_POST['pas']) || empty($_POST['Epo'])) {
-            $mensaje = "Todos los campos son obligatorios. Por favor, llene todos los campos.";
-            header("Location: formulario.php?login-form&mensaje=" . urlencode($mensaje));
-            exit();
-        }
-
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "proyecto";
-
-        $conn = new \mysqli($servername, $username, $password, $database);
-
-        if ($conn->connect_error) {
-            die("Conexión fallida: " . $conn->connect_error);
-        }
-
-        $sql_check_cedula = "SELECT COUNT(*) AS total FROM empleado WHERE cedula = ?";
-        $stmt_check_cedula = $conn->prepare($sql_check_cedula);
-        $stmt_check_cedula->bind_param("s", $_POST['Ecedu']);
-        $stmt_check_cedula->execute();
-        $result_check_cedula = $stmt_check_cedula->get_result();
-        $row_check_cedula = $result_check_cedula->fetch_assoc();
-
-        if ($row_check_cedula['total'] > 0) {
-            $mensaje = "Cédula ya registrada.";
-            $stmt_check_cedula->close();
-            $conn->close();
-            header("Location: index.php?url=login-form&mensaje=" . urlencode($mensaje));
-            exit();
-        }
-
-        $sql = "INSERT INTO empleado (cedula, name, email, password, id_rol, estado) VALUES (?, ?, ?, ?, ?, ?)";
-
-        $stmt = $conn->prepare($sql);
-
-        $password = $_POST['pas'];
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-
-        $estado = 1;
-
-        $stmt->bind_param("sssssi", $_POST['Ecedu'], $_POST['Enom'], $_POST['Email'], $hash, $_POST['Epo'], $estado);
-
-        $stmt->execute();
-        $stmt->close();
-        $conn->close();
-
-        header("Location: index.php?url=login-form&success=1");
-        exit();
-    }
-
-
-
     //validar cedula 
     public function validar()
     {
@@ -257,4 +201,37 @@ public function delete4()
         header('Content-type: application/json; charset=utf-8');
         echo json_encode($jsonData);
     }
+    public function validar_correo()
+{
+    $usuario = "root";
+    $password = "";
+    $servidor = "localhost";
+    $basededatos = "proyecto";
+    $con = mysqli_connect($servidor, $usuario, $password) or die("No se ha podido conectar al Servidor");
+    mysqli_query($con, "SET SESSION collation_connection ='utf8_unicode_ci'");
+    $db = mysqli_select_db($con, $basededatos) or die("Upps! Error en conectar a la Base de Datos");
+
+    $email = $_REQUEST['email'];
+
+    // Verificando si existe algún cliente en la BD ya con dicho correo electrónico asignado
+    $jsonData = array();
+    $selectQuery = ("SELECT email FROM empleado WHERE email='" . $email . "' ");
+    $query = mysqli_query($con, $selectQuery);
+    $totalCliente = mysqli_num_rows($query);
+
+    // Validamos que la consulta haya retornado información
+    if ($totalCliente <= 0) {
+        $jsonData['success'] = 0;
+        $jsonData['message'] = '';
+    } else {
+        // Si hay datos entonces retornas algo
+        $jsonData['success'] = 1;
+        $jsonData['message'] = '<p style="color:red;">Ya existe el correo electrónico <strong>(' . $email . ')<strong></p>';
+    }
+
+    // Mostrando mi respuesta en formato Json
+    header('Content-type: application/json; charset=utf-8');
+    echo json_encode($jsonData);
+}
+
 }

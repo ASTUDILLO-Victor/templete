@@ -16,6 +16,7 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/jquery.dataTables.min.js"> </script>
     <script src="js/validar.js"></script>
+    <script src="js/validar2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/bootstrap.bundle.js"></script>
     <link

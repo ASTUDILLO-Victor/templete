@@ -116,6 +116,7 @@ class PagesController
         
         
     }
+    //como gia 
     public function services()
     {
         if (Auth::check()) {
