@@ -19,9 +19,9 @@ class recuperarControllers
     
         // Conexión a la base de datos
         $host = 'localhost';
-        $dbname = 'proyecto';
-        $username = 'root';
-        $password = '';
+        $dbname = 'u246287323_airsafe';
+        $username = 'u246287323_root';
+        $password = 'u1|G9Qd|9V';
     
         try {
             $pdo = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password);
