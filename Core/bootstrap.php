@@ -1,10 +1,4 @@
 <?php
-// bootstrap.php
-
-// Autoload function to include class files
-// Verificar la inclusión de App.php
-require_once __DIR__ . '/app.php';
-
 // Usar las clases después de cargarlas automáticamente
 use Core\App;
 use Core\Database\QueryBuilder;
