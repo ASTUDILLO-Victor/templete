@@ -1,8 +1,7 @@
 <?php
-
 use Core\Router;
 require "vendor/autoload.php";
-require 'core/bootstrap.php';
+require "core/bootstrap.php";
 // use Core\Router;
 // require 'models/Task.php';
 
