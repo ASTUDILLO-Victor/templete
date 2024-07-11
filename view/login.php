@@ -26,7 +26,16 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script  src="js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .input-group-append {
+            cursor: pointer;
+        }
+        .input-group-text {
+            background: #fff;
+            border-left: 0;
+        }
+    </style>
 
 </head>
 
@@ -53,14 +62,23 @@
                                     </div>
                                     <form class="user" action="index.php?url=login" method="POST">
                                         <div class="form-group">
+                                        <label for="ema">Correo:</label>
                                             <input type="email" class="form-control form-control-user"
                                             id="email" name="email" aria-describedby="emailHelp"
                                                 placeholder="Ingrese correo" required>
                                         </div>
                                         <div class="form-group">
+                                            <label for="password">Contraseña:</label>
+                                            <div class="input-group">
                                             <input type="password" class="form-control form-control-user"
                                             id="password" name="password" type="password" placeholder="Ingrese contraseña" required>
-                                        </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" onclick="togglePasswordVisibility()">
+                                                        <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                       
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
@@ -106,4 +124,20 @@
 </body>
 
 </html>
+<script>
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('password');
+        const toggleIcon = document.getElementById('togglePasswordIcon');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    }
+    </script>
 <?= require "notificacion/noti.php" ?>

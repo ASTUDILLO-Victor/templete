@@ -1,70 +1,65 @@
-<h1>Proyecto Aplicación Web Para Reportes y Recolecion De Datos De Sensores 📈📉</h1>
-Proyecto de Aplicación Web
-Avance del Proyecto
-Hasta el momento, se ha logrado un progreso significativo en el desarrollo del proyecto de aplicación web. A continuación, se detallan los módulos implementados y las funcionalidades incluidas:
-1. Módulo de inicio de sesión 🔒
+# [Start Bootstrap - SB Admin 2](https://startbootstrap.com/theme/sb-admin-2/)
 
-Se ha desarrollado un sistema de autenticación de usuarios robusto y seguro.
-Los usuarios pueden iniciar sesión utilizando sus credenciales (usuario y contraseña).
-Se han implementado medidas de seguridad para proteger las contraseñas de los usuarios.
+[SB Admin 2](https://startbootstrap.com/theme/sb-admin-2/) is an open source admin dashboard theme for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
 
-2. Recuperación de Contraseña 📧
+For the legacy Bootstrap 3 version of this theme, you can view the [last stable release](https://github.com/StartBootstrap/startbootstrap-sb-admin-2/releases/tag/v3.3.7%2B1) of SB Admin 2 for Bootstrap 3.
 
-Se ha integrado la funcionalidad de recuperación de contraseña utilizando la librería PHPMailer.
-Los usuarios pueden solicitar la recuperación de su contraseña en caso de olvidarla.
-Se envía un correo electrónico al usuario con instrucciones para restablecer su contraseña.
-La librería PHPMailer facilita el envío de correos electrónicos de manera confiable y segura.
+## Preview
 
-3. Registro de Usuarios 📝
+[![SB Admin 2 Preview](https://assets.startbootstrap.com/img/screenshots/themes/sb-admin-2.png)](https://startbootstrap.github.io/startbootstrap-sb-admin-2/)
 
-Se ha implementado un formulario de registro de usuarios con validaciones exhaustivas.
-Los usuarios pueden crear una nueva cuenta proporcionando la información requerida.
-Se realizarán validaciones en tiempo real para garantizar la integridad de los datos ingresados.
-Se han aplicado medidas de seguridad para evitar el registro de usuarios no válidos o maliciosos.
-## Características
+**[Launch Live Preview](https://startbootstrap.github.io/startbootstrap-sb-admin-2/)**
 
-### ![Login Icon](https://img.icons8.com/ios-filled/24/000000/login-rounded-right.png) Módulo de Login
+## Status
 
-- **Autenticación de Usuarios**: Verifica las credenciales ingresadas por los usuarios.
-- **Sesiones Seguras**: Gestiona sesiones de usuario de manera segura.
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-sb-admin-2/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/startbootstrap-sb-admin-2.svg)](https://www.npmjs.com/package/startbootstrap-sb-admin-2)
+[![Build Status](https://travis-ci.org/StartBootstrap/startbootstrap-sb-admin-2.svg?branch=master)](https://travis-ci.org/StartBootstrap/startbootstrap-sb-admin-2)
+[![dependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2/status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2)
+[![devDependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2/dev-status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin-2?type=dev)
 
-### ![Password Recovery Icon](https://img.icons8.com/ios-filled/24/000000/forgot-password.png) Recuperación de Contraseña
+## Download and Installation
 
-- **Envío de Correos**: Utiliza la librería PHPMailer para enviar correos de recuperación de contraseña.
-- **Restablecimiento Seguro**: Permite a los usuarios restablecer su contraseña de manera segura.
+To begin using this template, choose one of the following options to get started:
 
-### ![User Registration Icon](https://img.icons8.com/ios-filled/24/000000/add-user-male.png) Registro de Usuarios
+* [Download the latest release on Start Bootstrap](https://startbootstrap.com/theme/sb-admin-2/)
+* Install via npm: `npm i startbootstrap-sb-admin-2`
+* Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-sb-admin-2.git`
+* [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-sb-admin-2)
 
-- **Validaciones Complejas**: Realiza validaciones exhaustivas en los datos ingresados por los usuarios.
-  - Validación de email.
-  - Validación de contraseñas seguras.
-  - Validación de campos requeridos.
-- **Almacenamiento Seguro**: Guarda la información de los usuarios de manera segura en la base de datos.
--  **imagenes del proyecto**:
-![image](https://github.com/ASTUDILLO-Victor/templete/assets/167276606/8c055b1b-4196-4646-9baf-703e08028b35)
-![image](https://github.com/ASTUDILLO-Victor/templete/assets/167276606/a72fdbe0-ce88-44bd-9a1f-962f28dc35eb)
-![image](https://github.com/ASTUDILLO-Victor/templete/assets/167276606/5a3733fa-f246-43dc-88e2-9c13341acc43)
+## Usage
 
+After installation, run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
 
+### Gulp Tasks
 
+* `gulp` the default task that builds everything
+* `gulp watch` browserSync opens the project in your default browser and live reloads when changes are made
+* `gulp css` compiles SCSS files into CSS and minifies the compiled CSS
+* `gulp js` minifies the themes JS file
+* `gulp vendor` copies dependencies from node_modules to the vendor directory
 
-Tecnologías Utilizadas
+You must have npm installed globally in order to use this build environment. This theme was built using node v11.6.0 and the Gulp CLI v2.0.1. If Gulp is not running properly after running `npm install`, you may need to update node and/or the Gulp CLI locally.
 
-PHP 🐘
-PHP Mailer 📨
-HTML🌐
-CSS 🎨
-JavaScript 🖥️
+## Bugs and Issues
 
-Próximos Pasos
-Mejorar la interfaz de usuario y la experiencia de navegación.
-Realizar pruebas exhaustivas para garantizar la estabilidad y seguridad del sistema.
-MODULO DE TIEMPO REAL DE TOMA DE DATOS DE SENSORES 
-MODULO DE REPORTE POR FECHAS 
+Have a bug or an issue with this template? [Open a new issue](https://github.com/StartBootstrap/startbootstrap-sb-admin-2/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](https://startbootstrap.com/theme/sb-admin-2/).
 
-Equipo de Desarrollo
+## About
 
-[Astudillo Campverde Cictor Mesias] 👨‍💻
+Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
 
+* <https://startbootstrap.com>
+* <https://twitter.com/SBootstrap>
 
-Si tienes alguna pregunta o sugerencia sobre el proyecto, no dudes en contactarnos. ¡Estamos emocionados de seguir avanzando y mejorando nuestra aplicación web! 💪
+Start Bootstrap was created by and is maintained by **[David Miller](https://davidmiller.io/)**.
+
+* <https://davidmiller.io>
+* <https://twitter.com/davidmillerhere>
+* <https://github.com/davidtmiller>
+
+Start Bootstrap is based on the [Bootstrap](https://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+
+## Copyright and License
+
+Copyright 2013-2021 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE) license.

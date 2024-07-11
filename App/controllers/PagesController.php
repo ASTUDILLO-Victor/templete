@@ -9,7 +9,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ( $userRole === 1 ) {
+            if ( $userRole === '1' ) {
                 $user = empleado::all();
                 $todo = array_filter($user);
                 $user1 = empleado::all5();
@@ -34,7 +34,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ($userRole === 1 ) {
+            if ($userRole === '1' ) {
                 $user = empleado::all2();
                 $todo = array_filter($user);
                 return view('tables2', [
@@ -54,7 +54,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ($userRole === 2 ) {
+            if ($userRole === '2' ) {
                 $user = empleado::all3();
                 $todo = array_filter($user);
                 $user1 = empleado::all6();
@@ -77,7 +77,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ($userRole === 2 ) {
+            if ($userRole === '2' ) {
                 $user = empleado::all4();
                 $todo = array_filter($user);
                 return view('tables4', [
@@ -95,7 +95,7 @@ class PagesController
     {
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
-            if ($userRole === 1 ) {
+            if ($userRole === '1' ) {
                 $user = empleado::all5();
             $todo = array_filter($user);
             return view('registro',[
@@ -113,10 +113,20 @@ class PagesController
         } else {
             return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
         }
-        
+        // if (Auth::check()) {
+        //     $user = empleado::all5();
+        //     $todo = array_filter($user);
+
+        //     return view('registro',[
+        //         'tasks' => $user,
+        //         'todo' => $todo,
+        //     ]);
+        // } else {
+        //     return redirect('index.php?url=login-form');
+        //      // Asegura que el script se detenga después de la redirección
+        // }
         
     }
-    //como gia 
     public function services()
     {
         if (Auth::check()) {
@@ -131,6 +141,47 @@ class PagesController
     {
             return view('resta');
 
+    }
+    public function grafico()
+    {
+        if (Auth::check()) {
+                return view('grafico');
+        } else {
+            return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
+        }
+    }
+    public function grafico2()
+    {
+        if (Auth::check()) {
+                return view('grafico2');
+        } else {
+            return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
+        }  
+    }
+    public function grafico3()
+    {
+        if (Auth::check()) {
+                return view('grafico3');
+        } else {
+            return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
+        }  
+    }
+    public function reporte()
+    {
+        if (Auth::check()) {
+            return view('reporte');
+        } else {
+            return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
+        }
+    }
+    public function reporte2()
+    {
+        if (Auth::check()) {
+            return view('reporte2');
+        } else {
+            return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
+        }
+        
     }
 }
 

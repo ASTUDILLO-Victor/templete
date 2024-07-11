@@ -1,6 +1,6 @@
 <?php 
 
-
+//require "modal/modal3.php";
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +25,9 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script  src="js/modal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
+    
 
 <style>
         body, html {
@@ -47,7 +49,7 @@
 
 <div class="card shadow">
         <div class="card-body">
-            <h5 class="card-title text-center">Suscríbete</h5>
+            <h5 class="card-title text-center">Recuperar contraseña</h5>
             <form action="index.php?url=recuperar2" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo Electrónico</label>
@@ -58,7 +60,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fas fa-paper-plane"></i> Enviar
-                </button>
+                </button><br><br>
+                <button onclick="window.location.href = 'index.php?url=login-form'" class="btn btn-primary w-100">
+                                Volver
+                        </button>
             </form>
         </div>
     </div>

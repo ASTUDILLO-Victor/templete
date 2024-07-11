@@ -30,7 +30,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':id', $user['id_e']);
         $stmt->execute();
 
-        echo "Tu contraseña ha sido actualizada.";
+        echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                Swal.fire({
+                    title: 'Éxito',
+                    text: 'Tú contraseña ha sido actualizada.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'index.php?url=login-form';
+                    }
+                });
+            });
+        </script>";
 
     } else {
         echo "Token inválido.";
@@ -112,67 +127,126 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 margin-bottom: 10px;
                 display: none;
             }
+            #password-rules {
+            text-align: left;
+            font-size: 0.8em;
+            color: grey;
+            line-height: 0.5;
+        }
+
+        #password-rules .rule {
+            display: block;
+            margin: 2px 0;
+        }
         </style>
     </head>
     <body>
-        <div class="container">
-            <h2>Restablecer Contraseña</h2>
-            <form id="resetForm" method="POST" action="index.php?url=resta">
-                <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-                <div class="form-group">
-                    <input type="password" id="new_password" name="new_password" placeholder="Nueva Contraseña" required>
-                    <i class="fas fa-eye" onclick="togglePassword('new_password')"></i>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirmar Contraseña" required>
-                    <i class="fas fa-eye" onclick="togglePassword('confirm_password')"></i>
-                </div>
-                <div class="error" id="error-message">Las contraseñas no coinciden.</div>
-                <div class="success" id="success-message">Las contraseñas coinciden.</div>
-                <button type="submit" class="btn">Restablecer Contraseña</button>
-            </form>
-        </div>
+    <div class="container">
+        <h2>Restablecer Contraseña</h2>
+        <form id="resetForm" method="POST" action="index.php?url=resta">
+            <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+            <div class="form-group">
+                <input type="password" id="new_password" name="new_password" placeholder="Nueva Contraseña" required>
+                <i class="fas fa-eye" onclick="togglePassword('new_password')"></i>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirmar Contraseña" required>
+                <i class="fas fa-eye" onclick="togglePassword('confirm_password')"></i>
+            </div>
+            <div class="error" id="error-message">Las contraseñas no coinciden.</div>
+            <div class="success" id="success-message">Las contraseñas coinciden.</div>
+            <div id="password-rules">
+                <span id="min-characters" class="rule">Mínimo 6 caracteres</span><br>
+                <span id="uppercase" class="rule">Una mayúscula</span><br>
+                <span id="lowercase" class="rule">Una minúscula</span><br>
+                <span id="number" class="rule">Un número</span>
+            </div>
+            <button type="submit" class="btn">Restablecer Contraseña</button>
+        </form>
+    </div>
+
         <script>
             function togglePassword(fieldId) {
-                var field = document.getElementById(fieldId);
-                var icon = field.nextElementSibling;
-                if (field.type === "password") {
-                    field.type = "text";
-                    icon.classList.remove("fa-eye");
-                    icon.classList.add("fa-eye-slash");
-                } else {
-                    field.type = "password";
-                    icon.classList.remove("fa-eye-slash");
-                    icon.classList.add("fa-eye");
-                }
+            var field = document.getElementById(fieldId);
+            var icon = field.nextElementSibling;
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                field.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+
+        document.getElementById('new_password').addEventListener('input', validatePasswordRules);
+        document.getElementById('confirm_password').addEventListener('input', validatePasswords);
+
+        function validatePasswordRules() {
+            var password = document.getElementById('new_password').value;
+            var minCharacters = document.getElementById('min-characters');
+            var uppercase = document.getElementById('uppercase');
+            var lowercase = document.getElementById('lowercase');
+            var number = document.getElementById('number');
+            
+            // Minimum 6 characters
+            if (password.length >= 6) {
+                minCharacters.style.color = 'green';
+            } else {
+                minCharacters.style.color = 'red';
             }
 
-            document.getElementById('new_password').addEventListener('input', validatePasswords);
-            document.getElementById('confirm_password').addEventListener('input', validatePasswords);
-
-            function validatePasswords() {
-                var newPassword = document.getElementById('new_password').value;
-                var confirmPassword = document.getElementById('confirm_password').value;
-                var errorMessage = document.getElementById('error-message');
-                var successMessage = document.getElementById('success-message');
-                
-                if (newPassword === confirmPassword) {
-                    errorMessage.style.display = 'none';
-                    successMessage.style.display = 'block';
-                } else {
-                    errorMessage.style.display = 'block';
-                    successMessage.style.display = 'none';
-                }
+            // At least one uppercase letter
+            if (/[A-Z]/.test(password)) {
+                uppercase.style.color = 'green';
+            } else {
+                uppercase.style.color = 'red';
             }
 
-            document.getElementById('resetForm').addEventListener('submit', function(event) {
-                var newPassword = document.getElementById('new_password').value;
-                var confirmPassword = document.getElementById('confirm_password').value;
-                if (newPassword !== confirmPassword) {
-                    event.preventDefault();
-                    document.getElementById('error-message').style.display = 'block';
-                }
-            });
+            // At least one lowercase letter
+            if (/[a-z]/.test(password)) {
+                lowercase.style.color = 'green';
+            } else {
+                lowercase.style.color = 'red';
+            }
+
+            // At least one number
+            if (/\d/.test(password)) {
+                number.style.color = 'green';
+            } else {
+                number.style.color = 'red';
+            }
+        }
+
+        function validatePasswords() {
+            var newPassword = document.getElementById('new_password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+            var errorMessage = document.getElementById('error-message');
+            var successMessage = document.getElementById('success-message');
+            
+            if (newPassword === confirmPassword && validatePasswordStrength(newPassword)) {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+        }
+
+        function validatePasswordStrength(password) {
+            return password.length >= 6 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password);
+        }
+
+        document.getElementById('resetForm').addEventListener('submit', function(event) {
+            var newPassword = document.getElementById('new_password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+            if (newPassword !== confirmPassword || !validatePasswordStrength(newPassword)) {
+                event.preventDefault();
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
+
         </script>
     </body>
     </html>

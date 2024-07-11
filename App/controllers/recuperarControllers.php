@@ -4,12 +4,10 @@ namespace App\controllers;
 use App\models\Task;
 use App\models\empleado;
 use PHPMailer\PHPMailer\PHPMailer;
-
 use PHPMailer\PHPMailer\Exception;
 
 class recuperarControllers
 {
-
     public function show()
     {
         return view('recuperar');
@@ -54,16 +52,45 @@ class recuperarControllers
     
                 // Enviar correo electrónico
                 $this->sendPasswordResetEmail($email, $token);
-                echo "<div class='alert alert-success' role='alert'>Se ha enviado un enlace de recuperación a tu correo electrónico.</div>";
-    
-                // Redirigir al usuario al login después de un breve retraso (por ejemplo, 3 segundos)
-                header("refresh:3;index.php?url=login-form");
+
+                // Mostrar alerta SweetAlert y redirigir
+                echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: 'Se ha enviado un enlace de recuperación a tu correo electrónico.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'index.php?url=login-form';
+                            }
+                        });
+                    });
+                </script>";
             } else {
-                echo "El correo electrónico no está registrado.";
+                echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'El correo electrónico no está registrado.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'index.php?url=recuperar';
+                            }
+                        });
+                    });
+                </script>";
             }
         }
     }
-    
+
     public function sendPasswordResetEmail($email, $token)
     {
         $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
@@ -83,7 +110,6 @@ class recuperarControllers
             $mail->addAddress($email);
     
             // Obtener información de ubicación y dispositivo
-            $locationInfo = 
             $deviceInfo = $this->getDeviceInfo();
     
             // Contenido del correo
@@ -157,9 +183,7 @@ class recuperarControllers
                         <p>Recibiste este correo porque solicitaste restablecer tu Password. Haz clic en el button de abajo para restablecer tu Password:</p>
                         <p><a href='http://localhost/templete-main/index.php?url=resta&token=$token'>Restablecer Password</a></p>
                         <p>Si no solicitaste restablecer tu Password, puedes ignorar este correo.</p>
-                        
                         <p><strong>Dispositivo:</strong> {$deviceInfo}</p>
-                        
                     </div>
                     <div class='footer'>
                         <p>Gracias,</p>
@@ -167,73 +191,25 @@ class recuperarControllers
                     </div>
                 </div>
             </body>
-            <script>
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    document.getElementById('locationInfo').innerHTML = '<strong>Ubicación:</strong> Latitud: ' + latitude + ', Longitud: ' + longitude;
-                });
-            } else {
-                document.getElementById('locationInfo').innerHTML = 'La geolocalización no está disponible en este navegador.';
-            }
-            
-            var userAgent = navigator.userAgent;
-            var deviceInfo = 'Navegador desconocido y SO';
-            
-            if (/MSIE/i.test(userAgent) && !/Opera/i.test(userAgent)) {
-                deviceInfo = 'Internet Explorer';
-            } else if (/Firefox/i.test(userAgent)) {
-                deviceInfo = 'Mozilla Firefox';
-            } else if (/Chrome/i.test(userAgent)) {
-                deviceInfo = 'Google Chrome';
-            } else if (/Safari/i.test(userAgent)) {
-                deviceInfo = 'Apple Safari';
-            } else if (/Opera/i.test(userAgent)) {
-                deviceInfo = 'Opera';
-            } else if (/Netscape/i.test(userAgent)) {
-                deviceInfo = 'Netscape';
-            }
-            
-            var osArray = {
-                '/windows nt 10/i': 'Windows 10',
-                '/windows nt 6.3/i': 'Windows 8.1',
-                '/windows nt 6.2/i': 'Windows 8',
-                '/windows nt 6.1/i': 'Windows 7',
-                '/windows nt 6.0/i': 'Windows Vista',
-                '/windows nt 5.2/i': 'Windows Server 2003/XP x64',
-                '/windows nt 5.1/i': 'Windows XP',
-                '/windows xp/i': 'Windows XP',
-                '/macintosh|mac os x/i': 'Mac OS X',
-                '/mac_powerpc/i': 'Mac OS 9',
-                '/linux/i': 'Linux',
-                '/ubuntu/i': 'Ubuntu',
-                '/iphone/i': 'iPhone',
-                '/ipod/i': 'iPod',
-                '/ipad/i': 'iPad',
-                '/android/i': 'Android',
-                '/blackberry/i': 'BlackBerry',
-                '/webos/i': 'Mobile'
-            };
-            
-            for (var regex in osArray) {
-                if (osArray.hasOwnProperty(regex) && new RegExp(regex).test(userAgent)) {
-                    deviceInfo += ' en ' + osArray[regex];
-                    break;
-                }
-            }
-            
-            document.getElementById('deviceInfo').innerHTML = '<strong>Dispositivo:</strong> ' + deviceInfo;
-        </script>
             </html>";
     
             $mail->send();
         } catch (\Exception $e) {
-            echo "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
+            echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            </script>";
         }
     }
-    
-   
+
     private function getDeviceInfo()
     {
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
@@ -283,5 +259,6 @@ class recuperarControllers
     
         return $deviceInfo;
     }
-
 }
+
+?>

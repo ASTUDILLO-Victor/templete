@@ -16,7 +16,6 @@
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/jquery.dataTables.min.js"> </script>
     <script src="js/validar.js"></script>
-    <script src="js/validar2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/bootstrap.bundle.js"></script>
     <link
@@ -31,6 +30,20 @@
             display: flex;
             justify-content: space-between;
         }
+       
+        .collapse-item {
+            display: block;
+            width: 100%;
+            box-sizing: border-box; 
+            padding: 10px;
+            font-size: 10.5px; /* Ajusta el tamaño de la fuente según sea necesario */
+            white-space: normal; /* Permite que el texto se rompa en varias líneas */
+            overflow-wrap: break-word; /* Asegura que el texto largo se divida y no sobresalga */
+        }
+
+
+
+
     </style>
 
 </head>
@@ -89,6 +102,7 @@
                         <a class="collapse-item" href="index.php?url=tables2">DESACTIVADOS</a>
                         
                         
+                        
                     </div>
                 </div>
             </li>
@@ -117,26 +131,46 @@
                 <!-- Código específico para usuarios -->
             <?php endif ?>
             
-            <li class="nav-item">
-                <a class="nav-link" href="">
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities2"
+                aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>GRAFICOS</span></a>
-            </li>
+                    <span>REPORTES</span></a>
+                    <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Concentraciones:</h6>
+                        <a class="collapse-item" href="index.php?url=reporte">Partículas Suspendidas en el Aire</a>
+                        
+                        <a class="collapse-item" href="index.php?url=reporte2">Compuestos Orgánicos Vólatiles</a>
+
+                        
+                    </div>
+                </div>
+            </li> -->
+            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Reportes</span>
+                    <span>MONITOREO</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="">reporte 1</a>
-                        <a class="collapse-item" href="">reporte 2</a>
+                        <h6 class="collapse-header">Concentraciones:</h6>
+                        <a class="collapse-item"  href="index.php?url=grafico">Partículas Suspendidas en el Aire</a>
+                        
+                        <a class="collapse-item" href="index.php?url=grafico2">Compuestos Orgánicos Vólatiles</a>
+
                         
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?url=reporte">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>REPORTES</span></a>
             </li>
 
         

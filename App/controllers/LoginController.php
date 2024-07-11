@@ -11,12 +11,9 @@ class LoginController
 
     public function login()
     {
-        // Sanitizar y validar las entradas del usuario
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $password = $_POST['password']; // Asumiendo que el password se maneja de manera segura más adelante
-    
-        // Intentar login usando métodos seguros en la clase Auth
-        if (Auth::tryLogin($email, $password)) {
+        Auth::tryLogin($_POST['email'], $_POST['password']);
+
+        if (Auth::check()) {
             return redirect('index.php?url=templete');
         } else {
             echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
