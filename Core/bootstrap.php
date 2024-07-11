@@ -2,7 +2,7 @@
 // bootstrap.php
 
 // Verificar la inclusión de App.php
-require_once __DIR__ . '/App.php';
+require_once __DIR__ . '/app.php';
 
 // Autoload function to include class files
 spl_autoload_register(function ($class) {
