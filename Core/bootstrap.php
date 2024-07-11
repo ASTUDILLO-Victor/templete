@@ -1,7 +1,7 @@
 <?php
-// require_once 'app.php';
-// require_once 'Database/QueryBuilder.php';
-// require_once 'Database/connection.php';
+require_once 'app.php';
+require_once 'Database/QueryBuilder.php';
+require_once 'Database/connection.php';
 use Core\App;
 use Core\Database\QueryBuilder;
 use Core\Database\Connection;
