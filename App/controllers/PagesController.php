@@ -9,7 +9,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ( $userRole === '1' ) {
+            if ( $userRole === 1 ) {
                 $user = empleado::all();
                 $todo = array_filter($user);
                 $user1 = empleado::all5();
@@ -34,7 +34,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ($userRole === '1' ) {
+            if ($userRole === 1 ) {
                 $user = empleado::all2();
                 $todo = array_filter($user);
                 return view('tables2', [
@@ -54,7 +54,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ($userRole === '2' ) {
+            if ($userRole === 2 ) {
                 $user = empleado::all3();
                 $todo = array_filter($user);
                 $user1 = empleado::all6();
@@ -77,7 +77,7 @@ class PagesController
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
     
-            if ($userRole === '2' ) {
+            if ($userRole === 2 ) {
                 $user = empleado::all4();
                 $todo = array_filter($user);
                 return view('tables4', [
@@ -95,7 +95,7 @@ class PagesController
     {
         if (Auth::check()) {
             $userRole = $_SESSION['id_rol'] ?? null; // Verifica el rol del usuario desde la sesión
-            if ($userRole === '1' ) {
+            if ($userRole === 1 ) {
                 $user = empleado::all5();
             $todo = array_filter($user);
             return view('registro',[
