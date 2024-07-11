@@ -1,6 +1,7 @@
 <?php
 namespace App\models;
 use App\models\Models;
+require_once 'model.php';
 class empleado extends Model
 {
 
