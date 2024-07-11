@@ -1,10 +1,10 @@
 {
-    "name": "roger/templete-main",
+    "name": "user/templete",
     "type": "project",
     "authors": [
         {
-            "name": "Rogstn",
-            "email": "161513111+Rogstn@users.noreply.github.com"
+            "name": "ASTUDILLO-Victor",
+            "email": "167276606+ASTUDILLO-Victor@users.noreply.github.com"
         }
     ],
     "require": {
@@ -12,12 +12,11 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\":"App/",
-            "Core\\":"Core/"
+            "App\\": "App/",
+            "Core\\": "Core/"
         },
         "files": [
             "functions.php"
         ]
-        
     }
 }
