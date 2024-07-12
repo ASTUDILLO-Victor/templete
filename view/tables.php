@@ -120,7 +120,7 @@ require "modal/modal.php";
     </div>
     <!-- Contenedor de la alerta -->
 <div class="alert" id="alert">
-  Los datos se han insertado correctamente.
+ 
 </div>
 
 </div>
