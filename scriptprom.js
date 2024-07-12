@@ -9,7 +9,7 @@ function generateChart() {
         Swal.fire({
             icon: 'warning',
             title: 'Fecha no seleccionada',
-            text: 'Por favor, selecciona una fecha.'
+            text: 'Por favor, selecione la fecha.'
         });
         return;
     }
