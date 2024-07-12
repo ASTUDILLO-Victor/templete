@@ -103,7 +103,7 @@ class recuperarControllers
             $mail->Username = 'prueba354astu@outlook.com'; // Tu correo de Outlook
             $mail->Password = 'nicole354'; // Tu contraseña de Outlook
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 465;
+            $mail->Port = 2525;
     
             // Remitente y destinatario
             $mail->setFrom('prueba354astu@outlook.com', 'Administrador');
