@@ -106,7 +106,7 @@ class recuperarControllers
             $mail->Port = 465;
     
             // Remitente y destinatario
-            $mail->setFrom('prueba354astu@outlook.com', 'Administrador');
+            $mail->setFrom('administrador@airsafe.es', 'Administrador');
             $mail->addAddress($email);
     
             // Obtener información de ubicación y dispositivo
