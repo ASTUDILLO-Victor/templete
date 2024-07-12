@@ -6,7 +6,11 @@ function generateChart() {
     const hour = document.getElementById('hour').value;
     // Verificar si se ha seleccionado una fecha
     if (!date) {
-        alert('Por favor, selecciona una fecha.');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Fecha no seleccionada',
+            text: 'Por favor, selecione la fecha.'
+        });
         return;
     }
 
@@ -209,6 +213,14 @@ function downsample(data, factor) {
 }
 
 document.getElementById('downloadPDF').addEventListener('click', () => {
+    if (!myChart) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Gráfico no generado',
+            text: 'Por favor, genera un gráfico antes de intentar descargar el PDF.'
+        });
+        return;
+    }
     const table = document.getElementById('table').value;
     const date = document.getElementById('date').value;
     const hour = document.getElementById('hour').value;
