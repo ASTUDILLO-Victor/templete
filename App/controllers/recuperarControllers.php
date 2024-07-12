@@ -98,12 +98,12 @@ class recuperarControllers
         try {
             // Configuración del servidor
             $mail->isSMTP();
-            $mail->Host = 'smtp.office365.com';
+            $mail->Host = 'smtp.hostinger.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'prueba354astu@outlook.com'; // Tu correo de Outlook
-            $mail->Password = 'nicole354'; // Tu contraseña de Outlook
+            $mail->Username = 'administrador@airsafe.es'; // Tu correo de Outlook
+            $mail->Password = '*41Re5af3'; // Tu contraseña de Outlook
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            $mail->Port = 465;
     
             // Remitente y destinatario
             $mail->setFrom('prueba354astu@outlook.com', 'Administrador');
