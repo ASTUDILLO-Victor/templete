@@ -1,9 +1,9 @@
 <?php
 // restablecer.php
 $host = 'localhost';
-$dbname = 'proyecto';
-$username = 'root'; // Tu usuario de MySQL
-$password = ''; // Tu contraseña de MySQL
+$dbname = 'u246287323_airsafe';
+$username = 'u246287323_root'; // Tu usuario de MySQL
+$password = 'u1|G9Qd|9V'; // Tu contraseña de MySQL
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
