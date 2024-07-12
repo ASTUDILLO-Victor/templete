@@ -183,5 +183,14 @@ class PagesController
         }
         
     }
+    public function reporte_uno()
+    {
+        if (Auth::check()) {
+            return view('reporte_uno');
+        } else {
+            return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
+        }
+        
+    }
 }
 

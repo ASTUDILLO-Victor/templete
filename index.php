@@ -36,6 +36,7 @@ $routes =
     'reporte2'=>['PagesController','reporte2'],
     'mychart'=>['mychartController','mychart'],
     'grafico3'=>['PagesController','grafico3'],
+    'reporte_uno'=>['PagesController','reporte_uno'],
 
     
     
