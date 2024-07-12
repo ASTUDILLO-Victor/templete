@@ -176,7 +176,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Concentraciones:</h6>
-                        <a class="collapse-item" href="index.php?url=reporte">Reporte</a>                        
+                        <a class="collapse-item" href="index.php?url=reporte">Muestras diarias</a>                        
                         <a class="collapse-item" href="index.php?url=reporte_uno">Partículas Suspendidas en el Aire</a>
                         <a class="collapse-item" href="index.php?url=reporte2">Compuestos Orgánicos Vólatiles</a>
 
