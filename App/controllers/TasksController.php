@@ -40,9 +40,9 @@ class TasksController
 
     // Parámetros de conexión a la base de datos
     $servername = getenv('DB_HOST') ?: 'localhost';
-    $username = getenv('DB_USER') ?: 'root';
-    $password = getenv('DB_PASS') ?: '';
-    $database = getenv('DB_NAME') ?: 'proyecto';
+    $username = getenv('DB_USER') ?: 'u246287323_root';
+    $password = getenv('DB_PASS') ?: 'u1|G9Qd|9V';
+    $database = getenv('DB_NAME') ?: 'u246287323_airsafe';
 
     $conn = new \mysqli($servername, $username, $password, $database);
 
@@ -223,9 +223,9 @@ class TasksController
         }
 
         $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "proyecto";
+        $username = "u246287323_root";
+        $password = "u1|G9Qd|9V";
+        $database = "u246287323_airsafe";
 
         $conn = new \mysqli($servername, $username, $password, $database);
 
@@ -272,10 +272,10 @@ class TasksController
     //validar cedula 
     public function validar()
     {
-        $usuario = "root";
-        $password = "";
+        $usuario = "u246287323_root";
+        $password = "u1|G9Qd|9V";
         $servidor = "localhost";
-        $basededatos = "proyecto";
+        $basededatos = "u246287323_airsafe";
         $con = mysqli_connect($servidor, $usuario, $password) or die("No se ha podido conectar al Servidor");
         mysqli_query($con, "SET SESSION collation_connection ='utf8_unicode_ci'");
         $db = mysqli_select_db($con, $basededatos) or die("Upps! Error en conectar a la Base de Datos");
@@ -306,10 +306,10 @@ class TasksController
     }
     public function correo()
     {
-        $usuario = "root";
-        $password = "";
+        $usuario = "u246287323_root";
+        $password = "u1|G9Qd|9V";
         $servidor = "localhost";
-        $basededatos = "proyecto";
+        $basededatos = "u246287323_airsafe";
         $con = mysqli_connect($servidor, $usuario, $password) or die("No se ha podido conectar al Servidor");
         mysqli_query($con, "SET SESSION collation_connection ='utf8_unicode_ci'");
         $db = mysqli_select_db($con, $basededatos) or die("Upps! Error en conectar a la Base de Datos");
