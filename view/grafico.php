@@ -152,7 +152,7 @@ require "params/nav.php";
           const lastItem = response.lastData;
 
           if (!myLineChart.data.labels.includes(lastItem.fecha_hora)) {
-            myLineChart.data.labels.push(lastItem.fecha_actual);
+            myLineChart.data.labels.push(lastItem.fecha_hora);
             myLineChart.data.datasets[0].data.push(lastItem.pm10);
             myLineChart.data.datasets[1].data.push(lastItem.pm25);
             myLineChart.update();
