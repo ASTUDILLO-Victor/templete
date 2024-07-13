@@ -45,7 +45,7 @@ require "params/nav.php";
               </div>
               <div class="card-body">
                   <div class="text-center">
-                      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15.5rem;" src="img/undraw_predictive_analytics_re_wxt8.svg" alt="...">
+                      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15.5rem;" src="img/grafico-de-linea.gif" alt="...">
                   </div>
                   <p>Gráfico para visualizar la toma de datos mediante los sensores</p>
               </div>
