@@ -4,17 +4,17 @@ function generateChart() {
     const table = document.getElementById('table').value;
     const date = document.getElementById('date').value;
     const hour = document.getElementById('hour').value;
-    // Verificar si se ha seleccionado una fecha
     if (!date) {
         Swal.fire({
             icon: 'warning',
             title: 'Fecha no seleccionada',
-            text: 'Por favor, selecione la fecha.'
+            text: 'Por favor, selecciona una fecha.'
         });
         return;
     }
 
-    fetch('fetch_hora.php', {
+
+    fetch('fetch_data.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -27,30 +27,30 @@ function generateChart() {
             myChart.destroy();
         }
 
-        const downsampleFactor = 10; // Ajusta este valor según sea necesario
+        const downsampleFactor = 10;
 
-
-        const labels = data.map(item => item.fecha_hora);
+        const labels = data.map(item => item.date);
         const downsampledLabels = downsample(labels, downsampleFactor);
 
         let datasets = [];
 
         if (table === 'lectura_sds011') {
             const pmdiez = data.map(item => item.pm10);
-            const pmdoscinco= data.map(item => item.pm25);
+            const pmdoscinco = data.map(item => item.pm25);
+
             const downsampledpmdiez = downsample(pmdiez, downsampleFactor);
             const downsampledpmdoscinco = downsample(pmdoscinco, downsampleFactor);
 
             datasets = [
                 {
-                    label: 'PM10 (µg/m3)',
+                    label: 'PM 10',
                     data: downsampledpmdiez,
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1,
                     fill: false
                 },
                 {
-                    label: 'PM2.5 (µg/m3)',
+                    label: 'PM 2.5',
                     data: downsampledpmdoscinco,
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
@@ -58,9 +58,8 @@ function generateChart() {
                 }
             ];
         } else if (table === 'lectura_mq138') {
-            const values = data.map(item => item.valor);
+            const values = data.map(item => item.value);
             const downsampledValues = downsample(values, downsampleFactor);
-
 
             datasets = [
                 {
@@ -108,7 +107,6 @@ function generateChart() {
                 }
             }
         });
-
         // Actualizar la tabla con los datos de promedios
         fetch('fetch_prom_data.php', {
             method: 'POST',

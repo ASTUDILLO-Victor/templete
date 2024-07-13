@@ -40,6 +40,7 @@ require "params/nav.php";
             <div class="form-group mb-2">
                 <label for="hour" class="mr-2">Hora:</label>
                 <select id="hour" name="hour" class="form-control mr-4">
+                    <option value="all">Todo el día</option>
                     <option value="00:00:00">00:00</option>
                     <option value="01:00:00">01:00</option>
                     <option value="02:00:00">02:00</option>
