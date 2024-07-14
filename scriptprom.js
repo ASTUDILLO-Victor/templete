@@ -1,5 +1,6 @@
 let myChart;
 let myBarChart;
+
 function generateChart() {
     const table = document.getElementById('table').value;
     const date = document.getElementById('date').value;
@@ -12,7 +13,6 @@ function generateChart() {
         });
         return;
     }
-
 
     fetch('fetch_data.php', {
         method: 'POST',
@@ -28,7 +28,6 @@ function generateChart() {
         }
 
         const downsampleFactor = 10;
-
         const labels = data.map(item => item.date);
         const downsampledLabels = downsample(labels, downsampleFactor);
 
@@ -107,7 +106,7 @@ function generateChart() {
                 }
             }
         });
-        // Actualizar la tabla con los datos de promedios
+
         fetch('fetch_prom_data.php', {
             method: 'POST',
             headers: {
@@ -124,7 +123,6 @@ function generateChart() {
                     { title: "Promedio PM10", data: 'prom_pm10' },
                     { title: "Promedio PM2.5", data: 'prom_pm25' },
                     { title: "Estado", data: 'estado' }                  
-                    
                 ];
             } else if (table === 'lectura_mq138') {
                 columns = [
@@ -138,10 +136,34 @@ function generateChart() {
             $('#dataTable').DataTable({
                 destroy: true,
                 data: data,
-                columns: columns
+                columns: columns,
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay datos disponibles en la tabla",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                    "infoFiltered": "(filtrado de _MAX_ entradas totales)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "No se encontraron registros coincidentes",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending": ": activar para ordenar la columna de manera ascendente",
+                        "sortDescending": ": activar para ordenar la columna de manera descendente"
+                    }
+                }
             });
-             // Crear el gráfico de barras con los datos de promedios
-             if (myBarChart) {
+
+            if (myBarChart) {
                 myBarChart.destroy();
             }
 
@@ -227,18 +249,16 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
 
     doc.text('Reporte de Conectraciones', 14, 16);
 
-    // Añadir primer gráfico
     const chartCanvas = document.getElementById('myChart');
     const chartImgData = chartCanvas.toDataURL('image/png');
     doc.addImage(chartImgData, 'PNG', 10, 20, 180, 100);
 
     doc.text(`Promedio: ${date}`, 14, 129);
-    // Añadir segundo gráfico
+    
     const barChartCanvas = document.getElementById('myBarChart');
     const barChartImgData = barChartCanvas.toDataURL('image/png');
     doc.addImage(barChartImgData, 'PNG', 10, 130, 180, 100);
 
-    // Añadir tabla
     const tableElement = document.getElementById('dataTable');
     doc.autoTable({ html: tableElement, startY: 240 });
 

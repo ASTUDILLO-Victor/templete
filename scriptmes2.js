@@ -12,7 +12,6 @@ document.getElementById('periodo').addEventListener('change', function() {
 });
 
 function generateChart() {
-    
     const periodo = document.getElementById('periodo').value;
     const mes = document.getElementById('mes').value;
 
@@ -31,7 +30,6 @@ function generateChart() {
 
         const labels = data.map(item => item.fecha);
         const valorData = data.map(item => item.promedio_valor);
-        //const pm25Data = data.map(item => item.promedio_pm25);
 
         const datasets = [
             {
@@ -80,13 +78,38 @@ function generateChart() {
                 <tr>
                     <td>${row.fecha}</td>
                     <td>${row.promedio_valor}</td>
-                    
                     <td>${estado}</td>
                 </tr>
             `;
         });
 
-        $('#dataTable').DataTable();
+        $('#dataTable').DataTable({
+            destroy: true,
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay datos disponibles en la tabla",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                "infoFiltered": "(filtrado de _MAX_ entradas totales)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron registros coincidentes",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": activar para ordenar la columna de manera ascendente",
+                    "sortDescending": ": activar para ordenar la columna de manera descendente"
+                }
+            }
+        });
     })
     .catch(error => console.error('Error:', error));
 }
@@ -103,7 +126,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    doc.text('Reporte Reporte de Compuestos Orgánicos Volátiles', 14, 16);
+    doc.text('Reporte de Compuestos Orgánicos Volátiles', 14, 16);
 
     const chartCanvas = document.getElementById('myChart');
     const chartImgData = chartCanvas.toDataURL('image/png');
