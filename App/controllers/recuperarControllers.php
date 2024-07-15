@@ -180,9 +180,9 @@ class recuperarControllers
                     </div>
                     <div class='content'>
                         <p>Hola,</p>
-                        <p>Recibiste este correo porque solicitaste restablecer tu Contraseña. Haz clic en el button de abajo para restablecer tu Contraseña:</p>
-                        <p><a href='http://airsafe.es/index.php?url=resta&token=$token'>Restablecer Conntraseña</a></p>
-                        <p>Si no solicitaste restablecer tu Password, puedes ignorar este correo.</p>
+                        <p>Recibiste este correo porque solicitaste restablecer tu contraseña. Haz clic en el botón de abajo para restablecer tu contraseña:</p>
+                        <p><a href='http://airsafe.es/index.php?url=resta&token=$token'>Restablecer Contraseña</a></p>
+                        <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo.</p>
                         <p><strong>Dispositivo:</strong> {$deviceInfo}</p>
                     </div>
                     <div class='footer'>
