@@ -19,11 +19,11 @@ $end_time = new DateTime($row['end_time']);
 $start_time->setTime(0, 0, 0);
 $end_time->setTime(23, 59, 59);
 
-// Calcular promedios para cada día
+// Calcular promedios para cada período de 12 horas
 $current_time = clone $start_time;
 while ($current_time <= $end_time) {
     $next_time = clone $current_time;
-    $next_time->modify('+1 day');
+    $next_time->modify('+12 hours');
 
     $stmt = $conn->prepare("
         SELECT AVG(prom_valor)
@@ -45,7 +45,7 @@ while ($current_time <= $end_time) {
 
     if ($prom_valor !== null) {
         $estado = ($prom_valor >= 200) ? 'Elevado' : 'No Elevado';
-        $fecha = $current_time->format('Y-m-d');
+        $fecha = $current_time->format('Y-m-d H:i:s');
 
         // Intentar insertar un nuevo registro
         $insert_stmt = $conn->prepare("
@@ -68,5 +68,5 @@ while ($current_time <= $end_time) {
 
 $conn->close();
 
-echo "Promedios diarios calculados y registrados correctamente.";
+echo json_encode(["message" => "Promedios de 12 horas calculados y registrados correctamente."]);
 ?>
