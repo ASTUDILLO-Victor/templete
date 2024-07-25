@@ -12,7 +12,6 @@ document.getElementById('periodo').addEventListener('change', function() {
 });
 
 function generateChart() {
-    
     const periodo = document.getElementById('periodo').value;
     const mes = document.getElementById('mes').value;
 
@@ -69,32 +68,51 @@ function generateChart() {
             }
         });
 
-        // Actualizar la tabla
-        const tableHead = document.getElementById('tableHead');
-        tableHead.innerHTML = `
-            <tr>
-                <th>Fecha</th>
-                <th>Promedio PM10</th>
-                <th>Promedio PM2.5</th>
-                <th>Estado</th>
-            </tr>
-        `;
+        // Destruir la instancia existente de DataTable si existe
+        if ($.fn.DataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().clear().destroy();
+        }
 
-        const tableBody = document.querySelector('#dataTable tbody');
-        tableBody.innerHTML = '';
-        data.forEach(row => {
-            const estado = row.promedio_pm10 > 100 || row.promedio_pm25 > 50 ? 'Elevado' : 'No Elevado';
-            tableBody.innerHTML += `
-                <tr>
-                    <td>${row.fecha}</td>
-                    <td>${row.promedio_pm10}</td>
-                    <td>${row.promedio_pm25}</td>
-                    <td>${estado}</td>
-                </tr>
-            `;
-        });
+        // Configurar las columnas de la tabla
+        let columns = [];
+        if (periodo === 'diario') {
+            columns = [
+                { title: "Fecha", data: 'fecha' },
+                { title: "Promedio PM10", data: 'promedio_pm10' },
+                { title: "Promedio PM2.5", data: 'promedio_pm25' },
+                { title: "Estado de concentración", data: 'estado' },
+                { title: "Actuador en Operación", data: function(row) {
+                    return row.estado === 'Elevado' ? 'Encendido' : 'Apagado';
+                }
+            }                  
 
+            ];
+        } else if (periodo === 'mensual') {
+            columns = [
+                { title: "Fecha", data: 'fecha' },
+                { title: "Promedio PM10", data: 'promedio_pm10' },
+                { title: "Promedio PM2.5", data: 'promedio_pm25' },
+                { title: "Promedio PM2.5", data: 'promedio_pm25', visible: false },
+                { title: "Estado", data: function(row) {
+                                 return row.promedio_pm10 > 100 || row.promedio_pm25 > 50 ? 'Elevado' : 'No Elevado';
+                             }
+                         }
+            ];
+        }
+        // const columns = [
+        //     { title: "Fecha", data: 'fecha' },
+        //     { title: "Promedio PM10", data: 'promedio_pm10' },
+        //     { title: "Promedio PM2.5", data: 'promedio_pm25' },
+        //     { title: "Estado", data: function(row) {
+        //             return row.promedio_pm10 > 100 || row.promedio_pm25 > 50 ? 'Elevado' : 'No Elevado';
+        //         }
+        //     }
+        // ];
+
+        // Inicializar DataTable con los datos obtenidos
         $('#dataTable').DataTable({
+            data: data,
+            columns: columns,
             destroy: true,
             language: {
                 "decimal": "",
