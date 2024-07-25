@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
 
@@ -18,6 +18,7 @@
     <script src="js/validar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/notificacion.js"></script>
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -25,6 +26,7 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script  src="js/modal.js"></script>
+    
     <style>
         .hola{
             display: flex;
@@ -40,11 +42,24 @@
             white-space: normal; /* Permite que el texto se rompa en varias líneas */
             overflow-wrap: break-word; /* Asegura que el texto largo se divida y no sobresalga */
         }
+        
 
+        #toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1050;
+        }
 
+        .toast {
+            min-width: 300px;
+        }
 
+        .toast-body p {
+            margin: 0;
+        }
+</style>
 
-    </style>
 
 </head>
 
@@ -131,23 +146,6 @@
                 <!-- Código específico para usuarios -->
             <?php endif ?>
             
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities2"
-                aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>REPORTES</span></a>
-                    <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Concentraciones:</h6>
-                        <a class="collapse-item" href="index.php?url=reporte">Partículas Suspendidas en el Aire</a>
-                        
-                        <a class="collapse-item" href="index.php?url=reporte2">Compuestos Orgánicos Vólatiles</a>
-
-                        
-                    </div>
-                </div>
-            </li> -->
             
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -170,18 +168,38 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities2"
                 aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-clipboard"></i>
                     <span>REPORTES</span></a>
                     <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Concentraciones:</h6>
-                        <a class="collapse-item" href="index.php?url=reporte">Muestras diarias</a>                        
+                        <a class="collapse-item" href="index.php?url=reporte">Reporte</a>                        
                         <a class="collapse-item" href="index.php?url=reporte_uno">Partículas Suspendidas en el Aire</a>
                         <a class="collapse-item" href="index.php?url=reporte2">Compuestos Orgánicos Vólatiles</a>
 
                     </div>
                 </div>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities3"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>MÁQUINA</span></a>
+                    <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Concentraciones:</h6>
+                        <a class="collapse-item" href="index.php?url=purificadora">Purificadora</a>
+                        <a class="collapse-item" href="index.php?url=mitigadora">Mitigadora</a>
+
+                    </div>
+                </div>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?url=purificadora">
+                    <i class="fas fa-toggle-off"></i>
+                    <span>MÁQUINA</span></a>
             </li>
 
         
@@ -286,7 +304,27 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                        
+                        <div id="toast-container" aria-live="polite" aria-atomic="true" class="d-flex justify-content-end">
+                            <!-- Toasts will be appended here dynamically -->
+                        </div>
+
+                        <div id="toast-template" style="display: none;">
+                            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                                <div class="toast-header">
+                                    <strong class="mr-auto">Notificación</strong>
+                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="toast-body">
+                                    <p class="toast-status"></p>
+                                    <p class="toast-description"></p>
+                                    <p class="toast-timestamp"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                                            
 
                     </ul>
 
