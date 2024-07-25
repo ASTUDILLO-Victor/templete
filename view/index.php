@@ -160,7 +160,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="barChart"></canvas>
+                        <canvas id="barChart"  width="200" height="100" class="mt-4"></canvas>
                     </div>
                 </div>
             </div>
