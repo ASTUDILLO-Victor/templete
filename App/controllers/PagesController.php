@@ -192,5 +192,14 @@ class PagesController
         }
         
     }
+    public function purificadora()
+    {
+        if (Auth::check()) {
+            return view('purificadora');
+        } else {
+            return redirect('index.php?url=login-form'); // Redirige a la página de inicio de sesión si no está autenticado
+        }
+        
+    }
 }
 
