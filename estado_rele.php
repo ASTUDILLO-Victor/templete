@@ -1,7 +1,7 @@
 <?php
 // Conexión a la base de datos
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=proyecto', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=u246287323_airsafe', 'u246287323_root', 'u1|G9Qd|9V');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Error al conectar a la base de datos: " . $e->getMessage());
