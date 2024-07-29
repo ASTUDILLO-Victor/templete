@@ -56,7 +56,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login">
-                                <img src="img/logo.jpeg" class="ima" width="500" height="600" alt="agraria">
+                                <img src="img/logo.jpg" class="ima" width="500" height="600" alt="agraria">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
