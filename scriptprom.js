@@ -43,14 +43,14 @@ function generateChart() {
             datasets = [
                 {
                     label: 'PM 10',
-                    data: downsampledpmdiez,
+                    data: pmdiez,
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1,
                     fill: false
                 },
                 {
                     label: 'PM 2.5',
-                    data: downsampledpmdoscinco,
+                    data: pmdoscinco,
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
                     fill: false
@@ -63,7 +63,7 @@ function generateChart() {
             datasets = [
                 {
                     label: 'PPM',
-                    data: downsampledValues,
+                    data: values,
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1,
                     fill: false
@@ -75,7 +75,7 @@ function generateChart() {
         myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: downsampledLabels,
+                labels: labels,
                 datasets: datasets
             },
             options: {
