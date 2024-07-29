@@ -35,6 +35,9 @@
             background: #fff;
             border-left: 0;
         }
+        body {
+            color: black;
+        }
     </style>
 
 </head>
@@ -53,12 +56,12 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login">
-                                <img src="img/Uventanas.jpg" class="ima" width="500" height="600" alt="agraria">
+                                <img src="img/logo.jpg" class="ima" width="500" height="600" alt="agraria">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Login - AireSafe </h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Iniciar Sesión - AireSafe </h1>
                                     </div>
                                     <form class="user" action="index.php?url=login" method="POST">
                                         <div class="form-group">

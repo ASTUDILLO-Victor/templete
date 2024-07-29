@@ -34,6 +34,7 @@
         }
        
         .collapse-item {
+            color: black;
             display: block;
             width: 100%;
             box-sizing: border-box; 
@@ -58,6 +59,23 @@
         .toast-body p {
             margin: 0;
         }
+        body {
+            color: black; 
+        }
+        
+        .dataTable {
+            color: black; 
+        }
+
+        
+        .dataTable thead th {
+            color: black; 
+        }
+
+        
+        .dataTable tbody td {
+            color: black; 
+        }
 </style>
 
 
@@ -76,7 +94,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php?url=templete">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+                    <img src="img/logito.png" alt="" style="width: 40px; height: 40px;">
                     
                 </div>
                 <div class="sidebar-brand-text mx-3"><span class="text-white text-end"><?=$_SESSION['name']?></span> <sup></sup></div>
