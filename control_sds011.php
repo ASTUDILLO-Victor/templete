@@ -14,8 +14,9 @@ if ($result->num_rows > 0) {
         // Enciende el relé
         $action = 'on';
         $descripcion = 'Concentración elevada de Pm10 o Pm2.5';
+        $timestamp = date('Y-m-d H:i:s');
         // Insertar el registro de encendido en relay_log
-        $sqlInsert = "INSERT INTO relay_log (action, descripcion) VALUES ('$action', '$descripcion')";
+        $sqlInsert = "INSERT INTO relay_log (action,timestamp, descripcion) VALUES ('$action', '$timestamp','$descripcion')";
         if ($conn->query($sqlInsert) === TRUE) {
             echo "Record inserted successfully<br>";
         } else {
@@ -23,13 +24,14 @@ if ($result->num_rows > 0) {
         }
 
         // Esperar 10 segundos antes de apagar el relé
-        sleep(10);
+        sleep(1800);
 
-        // Apagar el relé después de 10 segundos
+        // Apagar el relé después de 30 minutos
         $action = 'off';
-        $descripcion = 'Apagado automático después de 10 segundos';
+        $descripcion = 'Apagado automático después de 30 minutos';
+        $timestamp = date('Y-m-d H:i:s');
         // Insertar el registro de apagado en relay_log
-        $sqlInsert = "INSERT INTO relay_log (action, descripcion) VALUES ('$action', '$descripcion')";
+        $sqlInsert = "INSERT INTO relay_log (action, timestamp,descripcion) VALUES ('$action', '$timestamp','$descripcion')";
         if ($conn->query($sqlInsert) === TRUE) {
             echo "Record inserted successfully<br>";
 
@@ -40,8 +42,9 @@ if ($result->num_rows > 0) {
         // Apaga el relé
         $action = 'off';
         $descripcion = 'Concentraciones normales de PM10 y PM2.5';
+        $timestamp = date('Y-m-d H:i:s');
         // Insertar el registro en relay_log
-        $sqlInsert = "INSERT INTO relay_log (action, descripcion) VALUES ('$action', '$descripcion')";
+        $sqlInsert = "INSERT INTO relay_log (action,timestamp, descripcion) VALUES ('$action', '$timestamp','$descripcion')";
         if ($conn->query($sqlInsert) === TRUE) {
             echo "Record inserted successfully<br>";
         } else {
