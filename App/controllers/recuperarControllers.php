@@ -16,40 +16,40 @@ class recuperarControllers
     public function recuperar()
     {
         require 'vendor/autoload.php';
-    
+
         // Conexión a la base de datos
         $host = 'localhost';
         $dbname = 'u246287323_airsafe';
         $username = 'u246287323_root';
         $password = 'u1|G9Qd|9V';
-    
+
         try {
             $pdo = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password);
             $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             die("Error al conectar a la base de datos: " . $e->getMessage());
         }
-    
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
-    
+
             // Verificar si el email existe en la base de datos
             $stmt = $pdo->prepare("SELECT id_e FROM empleado WHERE email = :email");
             $stmt->bindParam(':email', $email);
             $stmt->execute();
-    
+
             if ($stmt->rowCount() > 0) {
                 $user = $stmt->fetch(\PDO::FETCH_ASSOC);
                 $token = bin2hex(random_bytes(16)); // Generar un token aleatorio
                 $expiration = date('Y-m-d H:i:s', strtotime('+24 hours')); // Calcular la fecha y hora de expiración (24 horas a partir de ahora)
-    
+
                 // Guardar el token en la base de datos
                 $stmt = $pdo->prepare("UPDATE empleado SET token = :token, fecha_C = :fecha_C WHERE id_e = :id_e");
                 $stmt->bindParam(':token', $token);
                 $stmt->bindParam(':fecha_C', $expiration);
                 $stmt->bindParam(':id_e', $user['id_e']);
                 $stmt->execute();
-    
+
                 // Enviar correo electrónico
                 $this->sendPasswordResetEmail($email, $token);
 
@@ -94,7 +94,7 @@ class recuperarControllers
     public function sendPasswordResetEmail($email, $token)
     {
         $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
-    
+
         try {
             // Configuración del servidor
             $mail->isSMTP();
@@ -104,14 +104,14 @@ class recuperarControllers
             $mail->Password = 'SopAdm2024*'; // Tu contraseña de Outlook
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
-    
+
             // Remitente y destinatario
             $mail->setFrom('adm_soporte@airsafe.es', 'Administrador');
             $mail->addAddress($email);
-    
+
             // Obtener información de ubicación y dispositivo
             $deviceInfo = $this->getDeviceInfo();
-    
+
             // Contenido del correo
             $mail->isHTML(true);
             $mail->Subject = 'Recuperación de contraseña';
@@ -175,25 +175,24 @@ class recuperarControllers
                 </style>
             </head>
             <body>
-                <div class='container'>
-                    <div class='header'>
-                        <h1>Restablecimiento de Contraseña</h1>
-                    </div>
-                    <div class='content'>
-                        <p>Hola,</p>
-                        <p>Recibiste este correo porque solicitaste restablecer tu contraseña. Haz clic en el botón de abajo para restablecer tu contraseña:</p>
-                        <p><a href='http://airsafe.es/index.php?url=resta&token=$token'>Restablecer Contraseña</a></p>
-                        <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo.</p>
-                        <p><strong>Dispositivo:</strong> {$deviceInfo}</p>
-                    </div>
-                    <div class='footer'>
-                        <p>Gracias,</p>
-                        <p>El equipo de soporte</p>
-                    </div>
-                </div>
+                <div class='header'>
+        <h1>Restablecimiento de Contraseña</h1>
+    </div>
+    <div class='content'>
+        <p>Hola,</p>
+        <p>Recibiste este correo porque solicitaste restablecer tu contraseña. Haz clic en el botón de abajo para restablecer tu contraseña:</p>
+        <p><a href='http://airsafe.es/index.php?url=resta&token=$token'>Restablecer Contraseña</a></p>
+        <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo.</p>
+        <p><strong>Dispositivo:</strong> {$deviceInfo}</p>
+    </div>
+    <div class='footer'>
+        <p>Gracias,</p>
+        <p>El equipo de soporte</p>
+        <p>Si no deseas recibir más correos de este tipo, puedes responder no correo para darte de baja aquí</a>.</p>
+    </div>
             </body>
             </html>";
-    
+
             $mail->send();
         } catch (\Exception $e) {
             echo "
@@ -215,7 +214,7 @@ class recuperarControllers
     {
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
         $deviceInfo = "Navegador desconocido y SO";
-    
+
         if (preg_match('/MSIE/i', $userAgent) && !preg_match('/Opera/i', $userAgent)) {
             $deviceInfo = 'Internet Explorer';
         } elseif (preg_match('/Firefox/i', $userAgent)) {
@@ -229,7 +228,7 @@ class recuperarControllers
         } elseif (preg_match('/Netscape/i', $userAgent)) {
             $deviceInfo = 'Netscape';
         }
-    
+
         $osArray = [
             '/windows nt 10/i' => 'Windows 10',
             '/windows nt 6.3/i' => 'Windows 8.1',
@@ -250,14 +249,14 @@ class recuperarControllers
             '/blackberry/i' => 'BlackBerry',
             '/webos/i' => 'Mobile'
         ];
-    
+
         foreach ($osArray as $regex => $value) {
             if (preg_match($regex, $userAgent)) {
                 $deviceInfo .= " en {$value}";
                 break;
             }
         }
-    
+
         return $deviceInfo;
     }
 }
