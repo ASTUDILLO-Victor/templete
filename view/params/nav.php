@@ -286,7 +286,7 @@
                             </div>
                         </div>
                     </form>-->
-                    <h1 class="m-0 font-weight-bold text-info">AirSafe </h1>
+                    <h1 class="m-0 font-weight-bold text-info">AireSafe </h1>
                     
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
