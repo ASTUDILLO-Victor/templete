@@ -93,7 +93,7 @@
             
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php?url=templete">
-                <div class="sidebar-brand-icon rotate-n-15">
+                <div class="sidebar-brand-icon">
                     <!-- <i class="fas fa-laugh-wink"></i> -->
                     <img src="img/logito.png" alt="" style="width: 40px; height: 40px;">
                     
@@ -193,7 +193,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Concentraciones:</h6>
-                        <a class="collapse-item" href="index.php?url=reporte">Reporte</a>                        
+                        <a class="collapse-item" href="index.php?url=reporte">Reporte Horario</a>                        
                         <a class="collapse-item" href="index.php?url=reporte_uno">Partículas Suspendidas en el Aire</a>
                         <a class="collapse-item" href="index.php?url=reporte2">Compuestos Orgánicos Vólatiles</a>
 

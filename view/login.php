@@ -56,7 +56,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login">
-                                <img src="img/logo.JPG" class="ima" width="500" height="600" alt="agraria">
+                                <img src="img/logo.JPG" class="ima" width="500" height="500" alt="agraria">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Iniciar Sesión
                                         </button>
                                         
                                         

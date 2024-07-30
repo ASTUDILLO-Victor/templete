@@ -202,7 +202,7 @@
                             </div>
                             <div class="row text-center">
                                 <div class="col-md-6">
-                                    <button type="reset" class="btn btn-dark">LIMPIAR CAMPOS</button>
+                                    <button type="reset" class="btn btn-dark">Limpiar campos</button>
                                 </div>
                                 <div class="col-md-6">
                                     <input class="btn btn-success" id='btnenviar' type="submit" value="Enviar formulario" disabled/>

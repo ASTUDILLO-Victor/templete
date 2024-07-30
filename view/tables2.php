@@ -35,7 +35,7 @@ require "modal/modal.php";
                             <th>Teléfono</th>
                             <th>Edad</th>
                             <th>Dirección</th>
-                            <th>ACTIVAR</th>
+                            <th>Activar</th>
                             
                         </tr>
                     </thead>
