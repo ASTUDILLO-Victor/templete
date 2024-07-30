@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>AireSafe - Login</title>
+    <title>AirSafe - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -61,7 +61,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Iniciar Sesión - AireSafe </h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Iniciar Sesión - AirSafe </h1>
                                     </div>
                                     <form class="user" action="index.php?url=login" method="POST">
                                         <div class="form-group">
