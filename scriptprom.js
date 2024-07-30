@@ -244,10 +244,15 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
     const table = document.getElementById('table').value;
     const date = document.getElementById('date').value;
     const hour = document.getElementById('hour').value;
+    let nombre = '';
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-
-    doc.text('Reporte de Conectraciones', 14, 16);
+    if (table === 'lectura_sds011') {
+        nombre = 'Partículas Suspendidas en el Aire';
+    } else{
+        nombre = 'Compuestos Orgánicos Volatiles';
+    }
+    doc.text(`Reporte de ${nombre}`, 14, 16);
 
     const chartCanvas = document.getElementById('myChart');
     const chartImgData = chartCanvas.toDataURL('image/png');

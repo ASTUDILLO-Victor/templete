@@ -155,7 +155,7 @@ document.getElementById('downloadPDF').addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    doc.text('Reporte de Concentraciones', 14, 16);
+    doc.text('Reporte de Partículas Suspendidas en el Aire', 14, 16);
 
     const chartCanvas = document.getElementById('myChart');
     const chartImgData = chartCanvas.toDataURL('image/png');
