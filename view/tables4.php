@@ -31,10 +31,7 @@ require "modal/modal.php";
                             <th>Apellido</th>
                             <th>E-mail</th>
                             <th>Rol</th>
-                            <th>Sexo</th>
-                            <th>Teléfono</th>
-                            <th>Edad</th>
-                            <th>Dirección</th>
+                            
                             <th>Activar</th>
                             
                         </tr>
@@ -46,10 +43,7 @@ require "modal/modal.php";
                             <th>Apellido</th>
                             <th>E-mail</th>
                             <th>Rol</th>
-                            <th>Sexo</th>
-                            <th>Teléfono</th>
-                            <th>Edad</th>
-                            <th>Dirección</th>
+                            
                             <th>Activar</th>
                             
                         </tr>
@@ -68,10 +62,7 @@ require "modal/modal.php";
                                 <td><?= $user->ape ?></td>
                                 <td><?= $user->email ?></td>
                                 <td><?= $user->nombre ?></td>
-                                <td><?= $user->sexo ?></td>
-                                <td><?= $user->celu ?></td>
-                                <td><?= $edad ?></td>
-                                <td><?= $user->dire ?></td>
+                                
                                                              
                                 <!-- Código específico para usuarios -->
                                 
