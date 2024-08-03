@@ -46,12 +46,8 @@ require "modal/modal.php";
                             <th>Apellido</th>
                             <th>E-mail</th>
                             <th>Rol</th>
-                            <th>Sexo</th>
-                            <th>Teléfono</th>
-                            <th>Edad</th>
-                            <th>Dirección</th>
                             <th>Desactivar</th>
-                            <th>Actualizar</th>
+                            <th>Editar</th>
                             
                         </tr>
                     </thead>
@@ -62,12 +58,8 @@ require "modal/modal.php";
                             <th>Apellido</th>
                             <th>E-mail</th>
                             <th>Rol</th>
-                            <th>Sexo</th>
-                            <th>Teléfono</th>
-                            <th>Edad</th>
-                            <th>Dirección</th>
                             <th>Desactivar</th>
-                            <th>Actualizar</th>
+                            <th>Editar</th>
                             
                         </tr>
                     </tfoot>
@@ -85,11 +77,7 @@ require "modal/modal.php";
                                 <td><?= $user->name ?></td>
                                 <td><?= $user->ape ?></td>
                                 <td><?= $user->email ?></td>
-                                <td><?= htmlspecialchars($user->nombre) ?></td>
-                                <td><?= $user->sexo ?></td>
-                                <td><?= $user->celu ?></td>
-                                <td><?= $edad  ?></td>
-                                <td><?= $user->dire ?></td>                                        
+                                <td><?= htmlspecialchars($user->nombre) ?></td>                                      
                                 <!-- Código específico para usuarios -->
                                 <td>
                                     <form id="deleteForm<?= $user->id_e ?>" action="index.php?url=eliminar3" method="post">

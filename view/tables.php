@@ -49,12 +49,8 @@ require "modal/modal.php";
                             <th>Apellido</th>
                             <th>E-mail</th>
                             <th>Rol</th>
-                            <th>Sexo</th>
-                            <th>Teléfono</th>
-                            <th>Edad</th>
-                            <th>Dirección</th>
                             <th>Desactivar</th>
-                            <th>Actualizar</th>
+                            <th>Editar</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -64,12 +60,8 @@ require "modal/modal.php";
                             <th>Apellido</th>
                             <th>E-mail</th>
                             <th>Rol</th>
-                            <th>Sexo</th>
-                            <th>Teléfono</th>
-                            <th>Edad</th>
-                            <th>Dirección</th>
                             <th>Desactivar</th>
-                            <th>Actualizar</th>
+                            <th>Editar</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -86,10 +78,7 @@ require "modal/modal.php";
                                 <td><?= htmlspecialchars($user->ape) ?></td>
                                 <td><?= htmlspecialchars($user->email) ?></td>
                                 <td><?= htmlspecialchars($user->nombre) ?></td>
-                                <td><?= htmlspecialchars($user->sexo) ?></td>
-                                <td><?= htmlspecialchars($user->celu) ?></td>
-                                <td><?= htmlspecialchars($edad ) ?></td>
-                                <td><?= htmlspecialchars($user->dire) ?></td>
+                                
                                 
                                 <td>
                                     <form id="deleteForm<?= htmlspecialchars($user->id_e) ?>" action="index.php?url=eliminar" method="post">

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>AireSafe</title>
+    <title>AirSafe</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -286,7 +286,7 @@
                             </div>
                         </div>
                     </form>-->
-                    <h1 class="m-0 font-weight-bold text-info">AireSafe </h1>
+                    <h1 class="m-0 font-weight-bold text-info">AirSafe </h1>
                     
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
