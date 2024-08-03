@@ -131,28 +131,7 @@
         </div>
     </div>
 </div>
-<style>
-        .form-group label {
-            font-weight: bold;
-        }
-        .input-group-text {
-            background-color: #f8f9fa;
-            border-right: 0;
-        }
-        .form-control {
-            border-left: 0;
-        }
-        .modal-body {
-            padding: 30px;
-        }
-        .btn-success {
-            width: 100%;
-            margin-top: 20px;
-        }
-        .text-danger {
-            margin-top: 5px;
-        }
-    </style>
+
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script>
     $(document).ready(function () {
